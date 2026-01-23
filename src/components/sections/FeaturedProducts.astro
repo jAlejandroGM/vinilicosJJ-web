@@ -85,7 +85,7 @@ const {
         products.map((product) => (
           <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             <!-- Imagen -->
-            <div class="relative aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200">
+            <div class="relative aspect-4/3 bg-linear-to-br from-stone-100 to-stone-200">
               <!-- Placeholder -->
               <div class="absolute inset-0 flex items-center justify-center">
                 <svg
@@ -133,7 +133,7 @@ const {
                 {product.features.map((feature) => (
                   <li class="flex items-center gap-2 text-sm text-gray-700">
                     <svg
-                      class="w-5 h-5 text-amber-800 flex-shrink-0"
+                      class="w-5 h-5 text-amber-800 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
