@@ -92,13 +92,7 @@ const {
     <div class="grid md:grid-cols-2 gap-8">
       {
         services.map((service, index) => (
-          <article
-            class={`relative bg-gradient-to-br ${
-              index % 2 === 0
-                ? "from-gray-50 to-stone-50"
-                : "from-stone-50 to-gray-50"
-            } rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group`}
-          >
+          <article class="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group border border-stone-100">
             {/* Icono */}
             <div class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <svg
@@ -130,7 +124,7 @@ const {
               {service.benefits.map((benefit) => (
                 <li class="flex items-start gap-3 text-sm text-gray-700">
                   <svg
-                    class="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5"
+                    class="w-5 h-5 text-amber-800 shrink-0 mt-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
