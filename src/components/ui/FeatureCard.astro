@@ -1,0 +1,38 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  class?: string;
+}
+
+const { icon, title, description, class: className = "" } = Astro.props;
+---
+
+<div
+  class={`bg-gray-50 rounded-xl p-6 hover:bg-stone-100 hover:shadow-md transition-all duration-300 group ${className}`}
+>
+  <div
+    class="w-12 h-12 bg-amber-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+  >
+    <svg
+      class="w-6 h-6 text-white"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d={icon}></path>
+    </svg>
+  </div>
+  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+    {title}
+  </h3>
+  <p class="text-sm text-gray-600 leading-relaxed">
+    {description}
+  </p>
+</div>

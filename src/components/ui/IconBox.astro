@@ -1,0 +1,61 @@
+---
+interface Props {
+  icon: string;
+  size?: "sm" | "md" | "lg";
+  variant?: "primary" | "white";
+  animate?: boolean;
+  class?: string;
+}
+
+const {
+  icon,
+  size = "md",
+  variant = "primary",
+  animate = false,
+  class: className = "",
+} = Astro.props;
+
+const sizeClasses = {
+  sm: "w-12 h-12",
+  md: "w-16 h-16",
+  lg: "w-20 h-20",
+};
+
+const iconSizeClasses = {
+  sm: "w-6 h-6",
+  md: "w-8 h-8",
+  lg: "w-10 h-10",
+};
+
+const variantClasses = {
+  primary: "bg-amber-800",
+  white: "bg-white",
+};
+
+const iconColorClasses = {
+  primary: "text-white",
+  white: "text-amber-800",
+};
+
+const animateClass = animate
+  ? "group-hover:scale-110 transition-transform"
+  : "";
+---
+
+<div
+  class={`${sizeClasses[size]} ${variantClasses[variant]} rounded-xl flex items-center justify-center ${animateClass} ${className}`}
+>
+  <svg
+    class={`${iconSizeClasses[size]} ${iconColorClasses[variant]}`}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d={icon}></path>
+  </svg>
+</div>

@@ -1,0 +1,252 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  mission?: {
+    title: string;
+    description: string;
+    values: string[];
+  };
+  vision?: {
+    title: string;
+    description: string;
+    goals: string[];
+  };
+}
+
+const {
+  title = "Misión y Visión",
+  subtitle = "Nuestro compromiso con la excelencia y el futuro",
+  mission = {
+    title: "Nuestra Misión",
+    description:
+      "Proporcionar soluciones de pisos de vinilo de la más alta calidad, combinando innovación, diseño y servicio excepcional. Nos comprometemos a transformar espacios con productos duraderos que superen las expectativas de nuestros clientes.",
+    values: [
+      "Calidad sin compromisos",
+      "Servicio personalizado",
+      "Innovación constante",
+      "Sostenibilidad",
+    ],
+  },
+  vision = {
+    title: "Nuestra Visión",
+    description:
+      "Ser la empresa líder en México en soluciones de pisos de vinilo, reconocida por nuestra excelencia, innovación y compromiso con la satisfacción del cliente. Aspiramos a crear espacios que inspiren y perduren.",
+    goals: [
+      "Liderazgo en el mercado",
+      "Expansión nacional",
+      "Tecnología de vanguardia",
+      "Clientes satisfechos",
+    ],
+  },
+} = Astro.props;
+---
+
+<section
+  class="py-16 md:py-24 bg-gray-50"
+  aria-labelledby="mission-vision-title"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Encabezado -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2
+        id="mission-vision-title"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+      >
+        {title}
+      </h2>
+      <p class="text-xl text-amber-800 font-semibold">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Grid de Misión y Visión -->
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+      <!-- Misión -->
+      <article
+        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100"
+      >
+        <!-- Icono decorativo -->
+        <div class="absolute top-8 right-8 opacity-10" aria-hidden="true">
+          <svg
+            class="w-32 h-32 text-amber-800"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="relative z-10">
+          <!-- Icono principal -->
+          <div
+            class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Contenido -->
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            {mission.title}
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {mission.description}
+          </p>
+
+          <!-- Valores -->
+          <div class="space-y-3">
+            <h4
+              class="text-sm font-semibold text-amber-800 uppercase tracking-wider mb-4"
+            >
+              Nuestros Valores
+            </h4>
+            <ul class="grid sm:grid-cols-2 gap-3" role="list">
+              {
+                mission.values.map((value) => (
+                  <li class="flex items-center gap-2 text-sm text-gray-700">
+                    <svg
+                      class="w-5 h-5 text-amber-800 flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span class="font-medium">{value}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Visión -->
+      <article
+        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100"
+      >
+        <!-- Icono decorativo -->
+        <div class="absolute top-8 right-8 opacity-10" aria-hidden="true">
+          <svg
+            class="w-32 h-32 text-amber-800"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="relative z-10">
+          <!-- Icono principal -->
+          <div
+            class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Contenido -->
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            {vision.title}
+          </h3>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            {vision.description}
+          </p>
+
+          <!-- Objetivos -->
+          <div class="space-y-3">
+            <h4
+              class="text-sm font-semibold text-amber-800 uppercase tracking-wider mb-4"
+            >
+              Nuestros Objetivos
+            </h4>
+            <ul class="grid sm:grid-cols-2 gap-3" role="list">
+              {
+                vision.goals.map((goal) => (
+                  <li class="flex items-center gap-2 text-sm text-gray-700">
+                    <svg
+                      class="w-5 h-5 text-amber-800 flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                    <span class="font-medium">{goal}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Quote inspiracional -->
+    <div class="mt-16 max-w-4xl mx-auto">
+      <blockquote
+        class="relative bg-gradient-to-r from-amber-800 to-amber-900 rounded-2xl p-8 md:p-12 text-center"
+      >
+        <div
+          class="absolute top-4 left-4 text-6xl text-amber-600 opacity-20"
+          aria-hidden="true"
+        >
+          "
+        </div>
+        <p
+          class="text-xl md:text-2xl text-white font-medium leading-relaxed relative z-10"
+        >
+          Transformamos espacios, creamos experiencias y construimos relaciones
+          duraderas con cada proyecto.
+        </p>
+        <div
+          class="absolute bottom-4 right-4 text-6xl text-amber-600 opacity-20"
+          aria-hidden="true"
+        >
+          "
+        </div>
+      </blockquote>
+    </div>
+  </div>
+</section>

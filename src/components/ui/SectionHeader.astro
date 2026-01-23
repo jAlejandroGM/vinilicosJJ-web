@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  align?: "center" | "left";
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  align = "center",
+  class: className = "",
+} = Astro.props;
+
+const alignClasses = {
+  center: "text-center mx-auto",
+  left: "text-left",
+};
+---
+
+<div class={`max-w-3xl ${alignClasses[align]} mb-16 ${className}`}>
+  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+    {title}
+  </h2>
+  {subtitle && <p class="text-xl text-amber-800 font-semibold">{subtitle}</p>}
+  <slot />
+</div>

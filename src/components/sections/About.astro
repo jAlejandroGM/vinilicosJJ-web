@@ -1,0 +1,193 @@
+---
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  features?: Feature[];
+  imageUrl?: string;
+  imageAlt?: string;
+}
+
+const {
+  title = "Sobre Nosotros",
+  subtitle = "Expertos en pisos de vinilo desde hace más de 10 años",
+  description = "En Vinílicos JJ nos especializamos en transformar espacios con soluciones de pisos de vinilo de alta calidad. Nuestro compromiso es ofrecer productos duraderos, instalación profesional y un servicio personalizado que supere las expectativas de nuestros clientes.",
+  features = [
+    {
+      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+      title: "Calidad Garantizada",
+      description:
+        "Trabajamos únicamente con marcas líderes y materiales certificados que garantizan durabilidad y resistencia.",
+    },
+    {
+      icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+      title: "Equipo Profesional",
+      description:
+        "Nuestros instaladores están certificados y cuentan con años de experiencia en el sector de pisos de vinilo.",
+    },
+    {
+      icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+      title: "Entrega Rápida",
+      description:
+        "Nos comprometemos a cumplir con los tiempos acordados, respetando tu agenda y presupuesto.",
+    },
+    {
+      icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+      title: "Atención Personalizada",
+      description:
+        "Asesoramos en cada paso del proceso, desde la selección hasta el mantenimiento de tu piso.",
+    },
+  ],
+  imageUrl = "/about-image.jpg",
+  imageAlt = "Equipo de Vinílicos JJ",
+} = Astro.props;
+---
+
+<section class="py-16 md:py-24 bg-white" aria-labelledby="about-title">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Encabezado de sección -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2
+        id="about-title"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+      >
+        {title}
+      </h2>
+      <p class="text-xl text-amber-800 font-semibold mb-6">
+        {subtitle}
+      </p>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        {description}
+      </p>
+    </div>
+
+    <!-- Contenido principal: Grid de imagen y características -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+      <!-- Imagen -->
+      <div class="order-2 lg:order-1">
+        <div class="relative rounded-2xl overflow-hidden shadow-xl">
+          <!-- Placeholder para imagen -->
+          <div
+            class="aspect-[4/3] bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center"
+          >
+            <svg
+              class="w-24 h-24 text-stone-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Imagen real (cuando esté disponible) -->
+          <!-- <img
+            src={imageUrl}
+            alt={imageAlt}
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          /> -->
+
+          <!-- Badge flotante -->
+          <div
+            class="absolute top-6 right-6 bg-amber-800 text-white px-4 py-2 rounded-lg font-semibold shadow-lg"
+          >
+            <div class="text-2xl font-bold">10+</div>
+            <div class="text-xs">Años</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="order-1 lg:order-2">
+        <div class="grid sm:grid-cols-2 gap-6">
+          {
+            features.map((feature) => (
+              <div class="bg-gray-50 rounded-xl p-6 hover:bg-stone-100 hover:shadow-md transition-all duration-300 group">
+                <div class="w-12 h-12 bg-amber-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <svg
+                    class="w-6 h-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d={feature.icon}
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                  {feature.title}
+                </h3>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Valores o estadísticas adicionales -->
+    <div
+      class="bg-gradient-to-r from-amber-800 to-amber-900 rounded-2xl p-8 md:p-12"
+    >
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div
+            class="text-4xl md:text-5xl font-bold text-white mb-2"
+            aria-label="Más de 500 clientes satisfechos"
+          >
+            500+
+          </div>
+          <div class="text-amber-100 font-medium">Clientes Satisfechos</div>
+        </div>
+        <div class="text-center">
+          <div
+            class="text-4xl md:text-5xl font-bold text-white mb-2"
+            aria-label="Más de 1000 metros cuadrados instalados"
+          >
+            1000+
+          </div>
+          <div class="text-amber-100 font-medium">m² Instalados</div>
+        </div>
+        <div class="text-center">
+          <div
+            class="text-4xl md:text-5xl font-bold text-white mb-2"
+            aria-label="10 años de garantía"
+          >
+            10
+          </div>
+          <div class="text-amber-100 font-medium">Años de Garantía</div>
+        </div>
+        <div class="text-center">
+          <div
+            class="text-4xl md:text-5xl font-bold text-white mb-2"
+            aria-label="98% de tasa de recomendación"
+          >
+            98%
+          </div>
+          <div class="text-amber-100 font-medium">Recomendación</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

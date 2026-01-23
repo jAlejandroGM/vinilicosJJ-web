@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import About from "../components/sections/About.astro";
+import FeaturedProducts from "../components/sections/FeaturedProducts.astro";
+import FeaturedServices from "../components/sections/FeaturedServices.astro";
+import MisionVision from "../components/sections/MisionVision.astro";
+import CTA from "../components/sections/CTA.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Vinílicos JJ - Pisos de Vinilo de Alta Calidad"
+  description="Especialistas en instalación de pisos de vinilo. Calidad, durabilidad y diseño para tu hogar o negocio."
+  keywords="pisos de vinilo, vinílicos, instalación de pisos, pisos laminados, pisos resistentes"
+>
+  <Header />
+
+  <main id="main-content" role="main">
+    <Hero />
+    <About />
+    <MisionVision />
+    <FeaturedProducts />
+    <FeaturedServices />
+    <CTA />
+  </main>
+
+  <Footer />
 </Layout>

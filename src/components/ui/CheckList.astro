@@ -1,0 +1,50 @@
+---
+interface Props {
+  items: string[];
+  iconType?: "check" | "arrow" | "checkCircle";
+  columns?: 1 | 2;
+  class?: string;
+}
+
+const {
+  items,
+  iconType = "check",
+  columns = 1,
+  class: className = "",
+} = Astro.props;
+
+const iconPaths = {
+  check: "M5 13l4 4L19 7",
+  arrow: "M13 7l5 5m0 0l-5 5m5-5H6",
+  checkCircle: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+};
+
+const gridClasses = {
+  1: "grid gap-3",
+  2: "grid sm:grid-cols-2 gap-3",
+};
+---
+
+<ul class={`${gridClasses[columns]} ${className}`} role="list">
+  {
+    items.map((item) => (
+      <li class="flex items-start gap-2 text-sm text-gray-700">
+        <svg
+          class="w-5 h-5 text-amber-800 shrink-0 mt-0.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d={iconPaths[iconType]}
+          />
+        </svg>
+        <span class="font-medium">{item}</span>
+      </li>
+    ))
+  }
+</ul>

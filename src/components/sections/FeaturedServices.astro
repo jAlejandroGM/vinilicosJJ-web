@@ -1,0 +1,206 @@
+---
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  benefits: string[];
+  href: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  services?: Service[];
+}
+
+const {
+  title = "Nuestros Servicios",
+  subtitle = "Soluciones integrales para tu proyecto de pisos",
+  services = [
+    {
+      icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+      title: "Instalación Profesional",
+      description:
+        "Nuestro equipo certificado garantiza una instalación impecable siguiendo las mejores prácticas de la industria.",
+      benefits: [
+        "Instaladores certificados",
+        "Garantía de instalación",
+        "Cumplimiento de tiempos",
+        "Limpieza post-instalación",
+      ],
+      href: "/servicios/instalacion",
+    },
+    {
+      icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
+      title: "Asesoría Personalizada",
+      description:
+        "Te ayudamos a elegir el piso perfecto para tu espacio considerando tráfico, estilo y presupuesto.",
+      benefits: [
+        "Visita sin costo",
+        "Análisis del espacio",
+        "Recomendaciones expertas",
+        "Presupuesto detallado",
+      ],
+      href: "/servicios/asesoria",
+    },
+    {
+      icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+      title: "Mantenimiento",
+      description:
+        "Servicios de mantenimiento preventivo y correctivo para mantener tus pisos como nuevos por más tiempo.",
+      benefits: [
+        "Limpieza especializada",
+        "Reparaciones menores",
+        "Productos profesionales",
+        "Planes de mantenimiento",
+      ],
+      href: "/servicios/mantenimiento",
+    },
+    {
+      icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+      title: "Entrega Rápida",
+      description:
+        "Gestión eficiente de logística para que recibas tus productos en tiempo récord sin comprometer la calidad.",
+      benefits: [
+        "Envío a toda la república",
+        "Seguimiento en tiempo real",
+        "Manejo cuidadoso",
+        "Entrega programada",
+      ],
+      href: "/servicios/entrega",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="py-16 md:py-24 bg-gray-50" aria-labelledby="services-title">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Encabezado -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2
+        id="services-title"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+      >
+        {title}
+      </h2>
+      <p class="text-xl text-amber-800 font-semibold">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Grid de servicios -->
+    <div class="grid md:grid-cols-2 gap-8">
+      {
+        services.map((service, index) => (
+          <article
+            class={`relative bg-gradient-to-br ${
+              index % 2 === 0
+                ? "from-gray-50 to-stone-50"
+                : "from-stone-50 to-gray-50"
+            } rounded-2xl p-8 hover:shadow-xl transition-all duration-300 group`}
+          >
+            {/* Icono */}
+            <div class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d={service.icon}
+                />
+              </svg>
+            </div>
+
+            {/* Contenido */}
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              {service.title}
+            </h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              {service.description}
+            </p>
+
+            {/* Beneficios */}
+            <ul class="space-y-3 mb-8" role="list">
+              {service.benefits.map((benefit) => (
+                <li class="flex items-start gap-3 text-sm text-gray-700">
+                  <svg
+                    class="w-5 h-5 text-amber-800 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA */}
+            <a
+              href={service.href}
+              class="inline-flex items-center text-amber-800 font-semibold hover:text-amber-900 transition-colors group-hover:gap-3 gap-2"
+            >
+              Más información
+              <svg
+                class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </a>
+
+            {/* Decoración */}
+            <div
+              class="absolute top-4 right-4 w-24 h-24 bg-amber-800 opacity-5 rounded-full blur-2xl"
+              aria-hidden="true"
+            />
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- CTA general -->
+    <div class="mt-12 text-center">
+      <a
+        href="/servicios"
+        class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-amber-800 rounded-lg hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-800 transition-colors shadow-lg hover:shadow-xl"
+      >
+        Ver todos los servicios
+        <svg
+          class="w-5 h-5 ml-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

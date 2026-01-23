@@ -1,0 +1,54 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  variant?: "default" | "inverse";
+  size?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const {
+  value,
+  label,
+  variant = "default",
+  size = "md",
+  class: className = "",
+} = Astro.props;
+
+const variantClasses = {
+  default: "text-amber-800",
+  inverse: "text-white",
+};
+
+const sizeClasses = {
+  sm: {
+    value: "text-2xl md:text-3xl",
+    label: "text-xs",
+  },
+  md: {
+    value: "text-3xl md:text-4xl",
+    label: "text-sm",
+  },
+  lg: {
+    value: "text-4xl md:text-5xl",
+    label: "text-sm md:text-base",
+  },
+};
+
+const labelVariantClasses = {
+  default: "text-gray-600",
+  inverse: "text-amber-100 font-medium",
+};
+---
+
+<div class={`text-center ${className}`}>
+  <div
+    class={`${sizeClasses[size].value} ${variantClasses[variant]} font-bold mb-2`}
+    aria-label={label}
+  >
+    {value}
+  </div>
+  <div class={`${sizeClasses[size].label} ${labelVariantClasses[variant]}`}>
+    {label}
+  </div>
+</div>

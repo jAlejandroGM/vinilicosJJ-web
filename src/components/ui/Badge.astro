@@ -1,0 +1,32 @@
+---
+interface Props {
+  text: string;
+  variant?: "primary" | "secondary" | "outline";
+  size?: "sm" | "md";
+  class?: string;
+}
+
+const {
+  text,
+  variant = "primary",
+  size = "md",
+  class: className = "",
+} = Astro.props;
+
+const variantClasses = {
+  primary: "bg-amber-800 text-white",
+  secondary: "bg-amber-50 text-amber-800",
+  outline: "bg-transparent border border-amber-800 text-amber-800",
+};
+
+const sizeClasses = {
+  sm: "px-3 py-1 text-xs",
+  md: "px-4 py-2 text-sm",
+};
+---
+
+<span
+  class={`inline-block ${variantClasses[variant]} ${sizeClasses[size]} rounded-lg font-semibold uppercase tracking-wider ${className}`}
+>
+  {text}
+</span>

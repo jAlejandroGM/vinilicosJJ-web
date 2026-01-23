@@ -1,0 +1,167 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  primaryCta?: {
+    text: string;
+    href: string;
+  };
+  secondaryCta?: {
+    text: string;
+    href: string;
+  };
+  features?: string[];
+}
+
+const {
+  title = "¿Listo para transformar tu espacio?",
+  description = "Obtén una cotización gratuita y descubre cómo podemos ayudarte a crear el ambiente perfecto con nuestros pisos de vinilo premium.",
+  primaryCta = {
+    text: "Solicitar Cotización",
+    href: "/contacto",
+  },
+  secondaryCta = {
+    text: "Ver Catálogo",
+    href: "/productos",
+  },
+  features = [
+    "Cotización sin compromiso",
+    "Asesoría personalizada",
+    "Instalación profesional",
+  ],
+} = Astro.props;
+---
+
+<section
+  class="relative py-20 md:py-28 bg-gradient-to-br from-amber-800 to-amber-900 overflow-hidden"
+  aria-labelledby="cta-title"
+>
+  <!-- Decoraciones de fondo -->
+  <div
+    class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzMuMzEgMCA2LTIuNjkgNi02cy0yLjY5LTYtNi02LTYgMi42OS02IDYgMi42OSA2IDYgNnptLTEyIDEyYzMuMzEgMCA2LTIuNjkgNi02cy0yLjY5LTYtNi02LTYgMi42OS02IDYgMi42OSA2IDYgNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Título -->
+      <h2
+        id="cta-title"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+      >
+        {title}
+      </h2>
+
+      <!-- Descripción -->
+      <p class="text-lg md:text-xl text-amber-100 leading-relaxed mb-8">
+        {description}
+      </p>
+
+      <!-- Features -->
+      <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-10">
+        {
+          features.map((feature) => (
+            <div class="flex items-center gap-2 text-white">
+              <svg
+                class="w-6 h-6 text-amber-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span class="font-medium">{feature}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href={primaryCta.href}
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-amber-900 bg-white rounded-lg hover:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors shadow-lg hover:shadow-xl"
+        >
+          {primaryCta.text}
+          <svg
+            class="w-5 h-5 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+
+        <a
+          href={secondaryCta.href}
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white border-2 border-white rounded-lg hover:bg-white hover:text-amber-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
+        >
+          {secondaryCta.text}
+          <svg
+            class="w-5 h-5 ml-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            ></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="mt-10 pt-10 border-t border-amber-700">
+        <div class="grid sm:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-2">
+              24h
+            </div>
+            <div class="text-amber-100 text-sm">Respuesta garantizada</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-2">
+              10+
+            </div>
+            <div class="text-amber-100 text-sm">Años de experiencia</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-white mb-2">
+              500+
+            </div>
+            <div class="text-amber-100 text-sm">Proyectos exitosos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decoración geométrica -->
+  <div
+    class="absolute top-10 left-10 w-32 h-32 bg-white opacity-5 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="absolute bottom-10 right-10 w-40 h-40 bg-amber-600 opacity-10 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+</section>
