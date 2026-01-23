@@ -1,13 +1,27 @@
 ---
+import DropdownMenu from "../ui/DropdownMenu.astro";
+import { getProductNavigation } from "../../data/products";
+
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/productos", label: "Productos" },
   { href: "/servicios", label: "Servicios" },
   { href: "/galeria", label: "Galería" },
   { href: "/contacto", label: "Contacto" },
 ];
 
 const currentPath = Astro.url.pathname;
+
+// Obtener navegación de productos
+const productNavItems = getProductNavigation();
+
+// Preparar items del dropdown con iconos SVG
+const dropdownItems = productNavItems.map((item) => ({
+  ...item,
+  icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+}));
+
+// Verificar si la ruta actual es de productos
+const isProductsActive = currentPath.startsWith("/productos");
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
@@ -48,7 +62,33 @@ const currentPath = Astro.url.pathname;
         aria-label="Navegación principal"
       >
         {
-          navLinks.map(({ href, label }) => {
+          navLinks.slice(0, 1).map(({ href, label }) => {
+            const isActive = currentPath === href;
+            return (
+              <a
+                href={href}
+                class={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  isActive
+                    ? "bg-amber-800 text-white"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-amber-800"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {label}
+              </a>
+            );
+          })
+        }
+
+        <!-- Dropdown de Productos -->
+        <DropdownMenu
+          label="Productos"
+          items={dropdownItems}
+          isActive={isProductsActive}
+        />
+
+        {
+          navLinks.slice(1).map(({ href, label }) => {
             const isActive =
               currentPath === href ||
               (href !== "/" && currentPath.startsWith(href));
@@ -116,8 +156,97 @@ const currentPath = Astro.url.pathname;
       aria-label="Navegación móvil"
     >
       <div class="flex flex-col gap-2">
+        <!-- Inicio -->
         {
-          navLinks.map(({ href, label }) => {
+          navLinks.slice(0, 1).map(({ href, label }) => {
+            const isActive = currentPath === href;
+            return (
+              <a
+                href={href}
+                class={`px-4 py-3 rounded-lg font-medium transition-colors ${
+                  isActive
+                    ? "bg-amber-800 text-white"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-amber-800"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {label}
+              </a>
+            );
+          })
+        }
+
+        <!-- Productos (Mobile Accordion) -->
+        <div class="border-t border-stone-100 pt-2">
+          <button
+            type="button"
+            id="mobile-productos-toggle"
+            class={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-colors ${
+              isProductsActive
+                ? "bg-amber-800 text-white"
+                : "text-gray-700 hover:bg-gray-100 hover:text-amber-800"
+            }`}
+            aria-expanded="false"
+            aria-controls="mobile-productos-menu"
+          >
+            <span>Productos</span>
+            <svg
+              class="w-5 h-5 transition-transform"
+              id="mobile-productos-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <div
+            id="mobile-productos-menu"
+            class="hidden pl-4 mt-2 space-y-2"
+            role="region"
+            aria-labelledby="mobile-productos-toggle"
+          >
+            {
+              productNavItems.map((category) => (
+                <div class="space-y-1">
+                  <a
+                    href={category.href}
+                    class="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-stone-50 hover:text-amber-800 rounded-lg transition-colors"
+                  >
+                    {category.label}
+                  </a>
+                  {category.subItems && category.subItems.length > 0 && (
+                    <div class="pl-4 space-y-1">
+                      {category.subItems.map((subItem) => (
+                        <a
+                          href={subItem.href}
+                          class="block px-4 py-2 text-xs text-gray-600 hover:bg-stone-50 hover:text-amber-800 rounded-lg transition-colors"
+                        >
+                          {subItem.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))
+            }
+            <a
+              href="/productos"
+              class="block px-4 py-2 text-sm font-semibold text-amber-800 hover:bg-stone-50 rounded-lg transition-colors border-t border-stone-100 mt-2 pt-2"
+            >
+              Ver todos los productos →
+            </a>
+          </div>
+        </div>
+
+        <!-- Otros Links -->
+        {
+          navLinks.slice(1).map(({ href, label }) => {
             const isActive =
               currentPath === href ||
               (href !== "/" && currentPath.startsWith(href));
@@ -149,7 +278,11 @@ const currentPath = Astro.url.pathname;
   const menu = document.getElementById("mobile-menu");
   const menuIcon = document.getElementById("menu-icon");
   const closeIcon = document.getElementById("close-icon");
+  const productosToggle = document.getElementById("mobile-productos-toggle");
+  const productosMenu = document.getElementById("mobile-productos-menu");
+  const productosIcon = document.getElementById("mobile-productos-icon");
 
+  // Toggle menú móvil principal
   if (button && menu && menuIcon && closeIcon) {
     button.addEventListener("click", () => {
       const isExpanded = button.getAttribute("aria-expanded") === "true";
@@ -165,7 +298,7 @@ const currentPath = Astro.url.pathname;
       closeIcon.classList.toggle("hidden");
     });
 
-    // Cerrar menú al hacer clic en un enlace
+    // Cerrar menú al hacer clic en un enlace (pero no en el toggle de productos)
     const mobileLinks = menu.querySelectorAll("a");
     mobileLinks.forEach((link) => {
       link.addEventListener("click", () => {
@@ -175,6 +308,20 @@ const currentPath = Astro.url.pathname;
         menuIcon.classList.remove("hidden");
         closeIcon.classList.add("hidden");
       });
+    });
+  }
+
+  // Toggle submenu de productos en móvil
+  if (productosToggle && productosMenu && productosIcon) {
+    productosToggle.addEventListener("click", () => {
+      const isExpanded =
+        productosToggle.getAttribute("aria-expanded") === "true";
+
+      productosToggle.setAttribute("aria-expanded", String(!isExpanded));
+      productosMenu.classList.toggle("hidden");
+      productosIcon.style.transform = isExpanded
+        ? "rotate(0deg)"
+        : "rotate(180deg)";
     });
   }
 </script>
