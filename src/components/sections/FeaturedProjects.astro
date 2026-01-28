@@ -1,0 +1,210 @@
+---
+import { projects } from "../../data/projects";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  maxProjects?: number;
+}
+
+const {
+  title = "Proyectos Recientes",
+  subtitle = "Conoce algunos de nuestros trabajos más destacados",
+  maxProjects = 3,
+} = Astro.props;
+
+// Obtener los últimos proyectos (ordenados por fecha de instalación más reciente)
+const featuredProjects = projects
+  .sort((a, b) => {
+    const dateA = new Date(a.installationDates.start);
+    const dateB = new Date(b.installationDates.start);
+    return dateB.getTime() - dateA.getTime();
+  })
+  .slice(0, maxProjects);
+---
+
+<section class="py-16 md:py-24 bg-white" aria-labelledby="projects-title">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Encabezado de sección -->
+    <div class="text-center mb-12 md:mb-16">
+      <h2
+        id="projects-title"
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+      >
+        {title}
+      </h2>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        featuredProjects.map((project) => (
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+            {/* Imagen del proyecto */}
+            <div class="relative h-64 bg-stone-200 overflow-hidden">
+              <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent z-10" />
+
+              {/* Placeholder de imagen */}
+              <div class="absolute inset-0 flex items-center justify-center bg-linear-to-br from-stone-100 to-stone-200">
+                <svg
+                  class="w-20 h-20 text-stone-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+
+              {/* Watermark */}
+              <div class="absolute bottom-3 right-3 bg-amber-800/90 text-white px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm z-20">
+                Vinílicos JJ
+              </div>
+
+              {/* Badge de categoría */}
+              <div class="absolute top-3 left-3 z-20">
+                <span
+                  class={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                    project.category === "comercial"
+                      ? "bg-blue-500 text-white"
+                      : project.category === "residencial"
+                        ? "bg-green-500 text-white"
+                        : "bg-purple-500 text-white"
+                  }`}
+                >
+                  {project.category.charAt(0).toUpperCase() +
+                    project.category.slice(1)}
+                </span>
+              </div>
+            </div>
+
+            {/* Contenido */}
+            <div class="p-6">
+              {/* Título y ubicación */}
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-800 transition-colors">
+                {project.clientName}
+              </h3>
+
+              <div class="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span>{project.location}</span>
+              </div>
+
+              {/* Descripción */}
+              <p class="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">
+                {project.description}
+              </p>
+
+              {/* Meta info */}
+              <div class="flex items-center justify-between text-xs text-gray-600 mb-4">
+                <div class="flex items-center gap-1.5">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>
+                    {new Date(
+                      project.installationDates.start,
+                    ).toLocaleDateString("es-PE", {
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+                {project.area && (
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"
+                      />
+                    </svg>
+                    <span>{project.area}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Servicios realizados */}
+              <div class="flex flex-wrap gap-2">
+                {project.services.slice(0, 2).map((service) => (
+                  <span class="inline-block px-2.5 py-1 bg-amber-50 text-amber-800 text-xs font-medium rounded">
+                    {service}
+                  </span>
+                ))}
+                {project.services.length > 2 && (
+                  <span class="inline-block px-2.5 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">
+                    +{project.services.length - 2}
+                  </span>
+                )}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- CTA para ver más proyectos -->
+    <div class="text-center mt-12">
+      <a
+        href="/proyectos"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-amber-800 text-white font-bold rounded-lg shadow-lg hover:bg-amber-900 hover:shadow-xl hover:scale-105 transition-all"
+      >
+        Ver Todos los Proyectos
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import { productCategories, type SubProduct } from "../../../data/products";
 import Header from "../../../components/layout/Header.astro";
 import Footer from "../../../components/layout/Footer.astro";
+import CTA from "../../../components/sections/CTA.astro";
 
 // Generar rutas estáticas solo para productos de accesorios
 export async function getStaticPaths() {
@@ -272,5 +273,6 @@ const relatedProducts =
     )
   }
 
+  <CTA />
   <Footer />
 </Layout>

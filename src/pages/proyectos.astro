@@ -1,0 +1,452 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import CTA from "../components/sections/CTA.astro";
+import { projects } from "../data/projects";
+
+const whatsappNumber = "51987654321"; // +51 987 654 321
+
+// Categorías para filtro
+const categories = [
+  { id: "todos", name: "Todos los Proyectos" },
+  { id: "comercial", name: "Comercial" },
+  { id: "residencial", name: "Residencial" },
+  { id: "corporativo", name: "Corporativo" },
+];
+---
+
+<Layout
+  title="Proyectos - Vinílicos JJ"
+  description="Descubre nuestros proyectos realizados en hoteles, oficinas, residencias y más. Experiencia comprobada en instalación de pisos vinílicos de alta calidad."
+  keywords="proyectos pisos vinílicos, instalaciones realizadas, portafolio vinílicos, casos de éxito"
+>
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="bg-linear-to-br from-amber-50 to-stone-50 py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <span
+          class="inline-block px-4 py-2 bg-amber-800 text-white text-sm font-semibold rounded-full mb-6"
+        >
+          Nuestro Trabajo
+        </span>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+        >
+          Proyectos Realizados
+        </h1>
+        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+          Más de 10 años transformando espacios con pisos de vinilo de alta
+          calidad. Conoce algunos de nuestros proyectos más destacados.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-white py-12 md:py-16 border-y border-stone-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-amber-800 mb-2">
+            150+
+          </div>
+          <div class="text-sm md:text-base text-gray-600">
+            Proyectos Completados
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-amber-800 mb-2">
+            50,000+
+          </div>
+          <div class="text-sm md:text-base text-gray-600">m² Instalados</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-amber-800 mb-2">
+            98%
+          </div>
+          <div class="text-sm md:text-base text-gray-600">
+            Satisfacción del Cliente
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-amber-800 mb-2">
+            10+
+          </div>
+          <div class="text-sm md:text-base text-gray-600">Años de Experiencia</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="py-16 md:py-24 bg-stone-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        {
+          categories.map((category) => (
+            <button
+              data-filter={category.id}
+              class={`px-6 py-2.5 rounded-lg font-semibold transition-all ${
+                category.id === "todos"
+                  ? "bg-amber-800 text-white shadow-md"
+                  : "bg-white text-gray-700 hover:bg-amber-50 hover:text-amber-800 border border-stone-200"
+              }`}
+            >
+              {category.name}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+        {
+          projects.map((project) => (
+            <article
+              data-category={project.category}
+              class="project-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            >
+              <!-- Image Carousel -->
+              <div class="relative h-64 bg-stone-200 overflow-hidden group">
+                <div class="carousel-container h-full">
+                  {project.images.map((image, index) => (
+                    <div
+                      class={`carousel-slide absolute inset-0 transition-opacity duration-500 ${
+                        index === 0 ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <img
+                        src={image}
+                        alt={`${project.clientName} - Imagen ${index + 1}`}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      {/* Watermark */}
+                      <div class="absolute bottom-4 right-4 bg-amber-800/90 text-white px-3 py-1.5 rounded text-sm font-semibold backdrop-blur-sm">
+                        Vinílicos JJ
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Navigation Buttons */}
+                {project.images.length > 1 && (
+                  <>
+                    <button
+                      class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      aria-label="Imagen anterior"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      aria-label="Siguiente imagen"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+
+                    {/* Indicators */}
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {project.images.map((_, index) => (
+                        <button
+                          class={`carousel-indicator w-2 h-2 rounded-full transition-all ${
+                            index === 0
+                              ? "bg-white w-6"
+                              : "bg-white/50 hover:bg-white/75"
+                          }`}
+                          data-index={index}
+                          aria-label={`Ir a imagen ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* Category Badge */}
+                <div class="absolute top-4 left-4">
+                  <span
+                    class={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                      project.category === "comercial"
+                        ? "bg-blue-500 text-white"
+                        : project.category === "residencial"
+                          ? "bg-green-500 text-white"
+                          : "bg-purple-500 text-white"
+                    }`}
+                  >
+                    {project.category.charAt(0).toUpperCase() +
+                      project.category.slice(1)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div class="p-6">
+                {/* Client & Location */}
+                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                  {project.clientName}
+                </h3>
+                <div class="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <span>{project.location}</span>
+                </div>
+
+                <p class="text-sm text-gray-700 mb-4 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Services */}
+                <div class="mb-4">
+                  <h4 class="text-xs font-semibold text-gray-900 uppercase tracking-wide mb-2">
+                    Servicios Realizados
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    {project.services.map((service) => (
+                      <span class="inline-block px-2.5 py-1 bg-amber-50 text-amber-800 text-xs font-medium rounded">
+                        {service}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Products */}
+                <div class="mb-4">
+                  <h4 class="text-xs font-semibold text-gray-900 uppercase tracking-wide mb-2">
+                    Productos Utilizados
+                  </h4>
+                  <ul class="space-y-1">
+                    {project.products.map((product) => (
+                      <li class="flex items-start gap-2 text-sm text-gray-700">
+                        <svg
+                          class="w-4 h-4 text-amber-800 mt-0.5 shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span>{product}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Meta Info */}
+                <div class="pt-4 border-t border-stone-200 flex items-center justify-between text-xs text-gray-600">
+                  <div class="flex items-center gap-1.5">
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>
+                      {new Date(project.installationDates.start).toLocaleDateString(
+                        "es-PE",
+                        { month: "short", year: "numeric" }
+                      )}
+                      {project.installationDates.end &&
+                        ` - ${new Date(project.installationDates.end).toLocaleDateString("es-PE", { month: "short", year: "numeric" })}`}
+                    </span>
+                  </div>
+                  {project.area && (
+                    <div class="flex items-center gap-1.5">
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"
+                        />
+                      </svg>
+                      <span>{project.area}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</Layout>
+
+<script>
+  // Carousel functionality
+  function initCarousels() {
+    const cards = document.querySelectorAll(".project-card");
+
+    cards.forEach((card) => {
+      const slides = card.querySelectorAll(".carousel-slide");
+      const prevBtn = card.querySelector(".carousel-prev");
+      const nextBtn = card.querySelector(".carousel-next");
+      const indicators = card.querySelectorAll(".carousel-indicator");
+
+      if (slides.length <= 1) return;
+
+      let currentSlide = 0;
+
+      function showSlide(index: number) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("opacity-100", i === index);
+          slide.classList.toggle("opacity-0", i !== index);
+        });
+
+        indicators.forEach((indicator, i) => {
+          if (i === index) {
+            indicator.classList.add("bg-white", "w-6");
+            indicator.classList.remove("bg-white/50");
+          } else {
+            indicator.classList.remove("bg-white", "w-6");
+            indicator.classList.add("bg-white/50");
+          }
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      prevBtn?.addEventListener("click", prevSlide);
+      nextBtn?.addEventListener("click", nextSlide);
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+        });
+      });
+    });
+  }
+
+  // Filter functionality
+  function initFilters() {
+    const filterButtons = document.querySelectorAll("[data-filter]");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-filter");
+
+        // Update active button
+        filterButtons.forEach((btn) => {
+          if (btn === button) {
+            btn.classList.remove(
+              "bg-white",
+              "text-gray-700",
+              "hover:bg-amber-50",
+              "hover:text-amber-800",
+              "border",
+              "border-stone-200"
+            );
+            btn.classList.add("bg-amber-800", "text-white", "shadow-md");
+          } else {
+            btn.classList.add(
+              "bg-white",
+              "text-gray-700",
+              "hover:bg-amber-50",
+              "hover:text-amber-800",
+              "border",
+              "border-stone-200"
+            );
+            btn.classList.remove("bg-amber-800", "text-white", "shadow-md");
+          }
+        });
+
+        // Filter cards
+        projectCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          if (filter === "todos" || category === filter) {
+            (card as HTMLElement).style.display = "block";
+          } else {
+            (card as HTMLElement).style.display = "none";
+          }
+        });
+      });
+    });
+  }
+
+  // Initialize on load
+  document.addEventListener("DOMContentLoaded", () => {
+    initCarousels();
+    initFilters();
+  });
+
+  // Re-initialize on view transitions
+  document.addEventListener("astro:page-load", () => {
+    initCarousels();
+    initFilters();
+  });
+</script>
