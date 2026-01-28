@@ -54,30 +54,8 @@ const { label, items, isActive = false } = Astro.props;
       {
         items.map((item) => (
           <div class="relative group/item">
-            {/* Main Item */}
-            <a
-              href={item.href}
-              class="flex items-start gap-3 px-4 py-3 hover:bg-stone-50 transition-colors"
-              role="menuitem"
-            >
-              {item.icon && (
-                <div class="w-10 h-10 bg-amber-800 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                  <svg
-                    class="w-5 h-5 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d={item.icon}
-                    />
-                  </svg>
-                </div>
-              )}
+            {/* Main Item - No clickeable */}
+            <div class="flex items-start gap-3 px-4 py-3 hover:bg-stone-50 transition-colors cursor-default">
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between">
                   <span class="font-semibold text-gray-900 text-sm">
@@ -106,7 +84,7 @@ const { label, items, isActive = false } = Astro.props;
                   </p>
                 )}
               </div>
-            </a>
+            </div>
 
             {/* Nested Submenu */}
             {item.subItems && item.subItems.length > 0 && (
@@ -134,29 +112,6 @@ const { label, items, isActive = false } = Astro.props;
           </div>
         ))
       }
-    </div>
-
-    <!-- View All Link -->
-    <div class="border-t border-stone-100 px-4 py-3">
-      <a
-        href="/productos"
-        class="flex items-center justify-center gap-2 text-sm font-semibold text-amber-800 hover:text-amber-900 transition-colors"
-      >
-        Ver todos los productos
-        <svg
-          class="w-4 h-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-        </svg>
-      </a>
     </div>
   </div>
 </div>

@@ -42,6 +42,9 @@ export interface ProductCategory {
   subProducts: SubProduct[];
   featured: boolean;
   order: number;
+  detailedFeatures?: string[]; // Características principales detalladas
+  usageAreas?: { category: string; examples: string[] }[]; // Áreas de uso organizadas
+  technicalData?: { label: string; value: string }[]; // Datos técnicos para ficha
 }
 
 export interface NavigationItem {
@@ -55,348 +58,388 @@ export interface NavigationItem {
 // Catálogo de productos
 export const productCategories: ProductCategory[] = [
   {
-    id: "spc",
-    name: "Pisos SPC",
-    slug: "spc",
+    id: "vinilicos",
+    name: "Pisos Vinílicos",
+    slug: "vinilicos",
     description:
-      "Stone Plastic Composite - La máxima resistencia y durabilidad en pisos de vinilo. Perfectos para áreas de alto tráfico comercial y residencial.",
-    shortDescription: "Máxima resistencia y durabilidad",
+      "Descubre nuestra amplia gama de pisos vinílicos de alta calidad, diseñados para ofrecer durabilidad, estética y funcionalidad en cualquier espacio. Desde soluciones residenciales hasta especializadas para entornos críticos.",
+    shortDescription: "Soluciones completas en pisos vinílicos",
     iconPath:
-      "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
-    imageUrl: "/products/spc-category.jpg",
-    imageAlt: "Categoría de pisos SPC",
+      "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    imageUrl: "/products/vinilicos-category.jpg",
+    imageAlt: "Categoría de pisos vinílicos",
     featured: true,
     order: 1,
+    detailedFeatures: [
+      "Variedad de Soluciones: Ofrecemos pisos vinílicos para cada necesidad, desde residencial hasta aplicaciones especializadas en salud y tecnología.",
+      "Alta Durabilidad: Todos nuestros pisos vinílicos están diseñados para resistir alto tráfico y condiciones exigentes.",
+      "Instalación Profesional: Contamos con sistemas de instalación que garantizan un resultado óptimo y duradero.",
+      "Mantenimiento Sencillo: Superficies de fácil limpieza que mantienen su apariencia por años.",
+    ],
+    usageAreas: [
+      {
+        category: "Residencial y Comercial",
+        examples: [
+          "Hogares, oficinas y comercios",
+          "Espacios de alto tráfico",
+          "Áreas húmedas",
+        ],
+      },
+      {
+        category: "Especializado",
+        examples: [
+          "Hospitales y clínicas",
+          "Laboratorios",
+          "Centros de datos",
+          "Industria alimentaria",
+        ],
+      },
+    ],
     subProducts: [
       {
-        id: "spc-roble-natural",
-        name: "SPC Roble Natural",
-        slug: "roble-natural",
-        shortDescription: "Elegante acabado en tonos naturales de roble",
+        id: "spc-click",
+        name: "SPC Click",
+        slug: "spc-click",
+        shortDescription: "Núcleo rígido ultrarresistente",
         fullDescription:
-          "Piso de vinilo SPC con acabado en roble natural. Textura realista que imita la veta de la madera con la durabilidad del stone plastic composite. Ideal para salas, comedores y recámaras.",
+          "El piso vinílico SPC (Stone Plastic Composite) es un tipo avanzado de suelo vinílico conocido por su núcleo rígido y ultrarresistente, compuesto principalmente por polvo de piedra caliza y polímeros de PVC. Esta composición le otorga una durabilidad y resistencia al agua superiores a los pisos vinílicos tradicionales o laminados.",
         features: [
           {
-            name: "100% Impermeable",
-            description: "Resistente al agua y humedad en todas sus capas",
+            name: "Composición Avanzada",
+            description:
+              "Núcleo compuesto por 60% carbonato de calcio para máxima estabilidad",
           },
           {
-            name: "Instalación Click",
-            description: "Sistema de ensamblaje rápido sin pegamento",
+            name: "Sistema Click",
+            description:
+              "Instalación flotante rápida sin necesidad de adhesivos",
           },
           {
-            name: "Alta Durabilidad",
-            description: "Capa de desgaste AC5 para uso comercial intenso",
+            name: "Alta Definición",
+            description:
+              "Capa decorativa que imita madera o piedra con realismo",
           },
           {
-            name: "Garantía 25 años",
-            description: "Garantía residencial de 25 años",
+            name: "Protección UV",
+            description: "Recubrimiento superior contra rayones y manchas",
           },
         ],
         specifications: [
-          { label: "Espesor", value: "5.5mm" },
-          { label: "Capa de desgaste", value: "0.5mm (AC5)" },
-          { label: "Dimensiones", value: "1220mm x 183mm" },
-          { label: "Textura", value: "Grabado en registro" },
-          { label: "Instalación", value: "Sistema Click" },
+          { label: "Composición", value: "60% Piedra caliza + PVC" },
+          { label: "Instalación", value: "Sistema Click Flotante" },
           { label: "Uso", value: "Residencial y Comercial" },
+          { label: "Resistencia", value: "Alto tráfico" },
         ],
-        imageUrl: "/products/spc-roble-natural.jpg",
-        imageAlt: "Piso SPC acabado roble natural",
-        price: {
-          value: 450,
-          unit: "m²",
-          currency: "MXN",
-        },
+        imageUrl: "/products/spc-click.jpg",
+        imageAlt: "Piso vinílico SPC Click",
         inStock: true,
         popular: true,
       },
       {
-        id: "spc-gris-cemento",
-        name: "SPC Gris Cemento",
-        slug: "gris-cemento",
-        shortDescription: "Diseño moderno con acabado tipo cemento pulido",
+        id: "conductivo",
+        name: "Conductivo Antiestático",
+        slug: "conductivo",
+        shortDescription: "Control ESD para entornos críticos",
         fullDescription:
-          "Piso de vinilo SPC con acabado en gris cemento. Diseño contemporáneo perfecto para estilos industriales y minimalistas. Altamente resistente al tráfico pesado.",
+          "El piso vinílico conductivo antiestático es un revestimiento de suelo especializado, diseñado para disipar la electricidad estática de forma controlada y segura hacia tierra, evitando así la acumulación de cargas electrostáticas (ESD) que pueden ser perjudiciales para equipos sensibles y personas.",
         features: [
           {
-            name: "Estilo Industrial",
-            description: "Acabado tipo cemento pulido ultra realista",
+            name: "Control ESD",
+            description:
+              "Previene descargas electrostáticas con materiales conductores",
           },
           {
-            name: "Anti-manchas",
-            description: "Superficie sellada que repele manchas",
+            name: "Resistencia Química",
+            description:
+              "Alto tránsito, resistente a abrasión, humedad y químicos",
           },
           {
-            name: "Silencioso",
-            description: "Reduce hasta 50% el ruido de impacto",
+            name: "Propiedades Antibacteriales",
+            description: "Superficie higiénica, fácil de limpiar",
           },
           {
-            name: "Fácil Limpieza",
-            description: "Mantenimiento mínimo con productos estándar",
+            name: "Seguridad Contra Fuego",
+            description: "Material autoextinguible",
           },
         ],
         specifications: [
-          { label: "Espesor", value: "6.0mm" },
-          { label: "Capa de desgaste", value: "0.7mm (AC5)" },
-          { label: "Dimensiones", value: "914mm x 457mm" },
-          { label: "Textura", value: "Mate con relieve" },
-          { label: "Instalación", value: "Sistema Click" },
-          { label: "Uso", value: "Comercial Intenso" },
+          { label: "Material", value: "PVC con aditivos conductores" },
+          { label: "Control", value: "Disipación de cargas ESD" },
+          { label: "Uso", value: "Quirófanos, centros de datos" },
+          { label: "Propiedades", value: "Antibacterial, antialérgico" },
         ],
-        imageUrl: "/products/spc-gris-cemento.jpg",
-        imageAlt: "Piso SPC acabado gris cemento",
-        price: {
-          value: 520,
-          unit: "m²",
-          currency: "MXN",
-        },
+        imageUrl: "/products/conductivo.jpg",
+        imageAlt: "Piso vinílico conductivo antiestático",
         inStock: true,
       },
       {
-        id: "spc-nogal-oscuro",
-        name: "SPC Nogal Oscuro",
-        slug: "nogal-oscuro",
-        shortDescription: "Tonos oscuros elegantes y sofisticados",
+        id: "homogeneo",
+        name: "Homogéneo Antibacterial",
+        slug: "homogeneo",
+        shortDescription: "Monocapa de alta durabilidad",
         fullDescription:
-          "Piso de vinilo SPC en tonos nogal oscuro. Acabado premium que aporta elegancia y calidez a cualquier espacio. Perfecto para oficinas y espacios comerciales de alto nivel.",
+          "El piso vinílico homogéneo antibacterial es un revestimiento de alto rendimiento, fabricado en una sola capa de material vinílico, diseñado para ofrecer durabilidad, resistencia y una superficie fácil de limpiar que inhibe la acumulación de bacterias y hongos. Es ideal para espacios con alto tráfico y exigencias sanitarias.",
         features: [
           {
-            name: "Acabado Premium",
-            description: "Textura de madera natural de alta fidelidad",
+            name: "Construcción Monocapa",
+            description: "Una sola capa con color continuo en todo el grosor",
           },
           {
-            name: "Resistencia UV",
-            description: "No se decolora con exposición solar",
+            name: "Antibacterial",
+            description: "Inhibe bacterias y hongos, hipoalergénico",
           },
           {
-            name: "Anti-bacteriano",
-            description: "Tratamiento antibacteriano integrado",
+            name: "Alta Resistencia",
+            description:
+              "Soporta tráfico intenso, humedad y productos químicos",
           },
           {
-            name: "Garantía Extendida",
-            description: "30 años de garantía residencial",
+            name: "Formato en Rollos",
+            description:
+              "Instalación con juntas termofusionadas para sellado completo",
           },
         ],
         specifications: [
-          { label: "Espesor", value: "5.0mm" },
-          { label: "Capa de desgaste", value: "0.5mm (AC5)" },
-          { label: "Dimensiones", value: "1524mm x 228mm" },
-          { label: "Textura", value: "Veta de madera 3D" },
-          { label: "Instalación", value: "Sistema Click Premium" },
-          { label: "Uso", value: "Residencial y Comercial" },
+          { label: "Material", value: "Resina de polivinilo (PVC)" },
+          { label: "Construcción", value: "Monocapa homogénea" },
+          { label: "Formato", value: "Rollos 2m x 20ml" },
+          { label: "Uso", value: "Salud, educación, comercial" },
         ],
-        imageUrl: "/products/spc-nogal-oscuro.jpg",
-        imageAlt: "Piso SPC acabado nogal oscuro",
-        price: {
-          value: 580,
-          unit: "m²",
-          currency: "MXN",
-        },
+        imageUrl: "/products/homogeneo.jpg",
+        imageAlt: "Piso vinílico homogéneo antibacterial",
         inStock: true,
         popular: true,
       },
     ],
   },
   {
-    id: "wpc",
-    name: "Pisos WPC",
-    slug: "wpc",
+    id: "pegamentos",
+    name: "Pegamentos",
+    slug: "pegamentos",
     description:
-      "Wood Plastic Composite - Confort y calidez con núcleo de espuma. Ideales para hogares que buscan estética natural con máximo confort bajo los pies.",
-    shortDescription: "Confort y calidez natural",
+      "Adhesivos especializados de alta calidad para la instalación profesional de pisos vinílicos.",
+    shortDescription: "Adhesivos profesionales",
     iconPath:
-      "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
-    imageUrl: "/products/wpc-category.jpg",
-    imageAlt: "Categoría de pisos WPC",
+      "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+    imageUrl: "/products/pegamentos-category.jpg",
+    imageAlt: "Categoría de pegamentos",
     featured: true,
     order: 2,
-    subProducts: [
+    detailedFeatures: [
+      "Adhesivos Especializados: Soluciones específicas para cada tipo de instalación de pisos vinílicos.",
+      "Sistemas Conductivos: Pegamentos diseñados para instalaciones que requieren disipación de electricidad estática.",
+      "Alta Adherencia: Formulaciones profesionales que garantizan fijación permanente y duradera.",
+      "Versatilidad de Uso: Productos compatibles con múltiples sustratos y aplicaciones.",
+    ],
+    usageAreas: [
       {
-        id: "wpc-pino-escandinavo",
-        name: "WPC Pino Escandinavo",
-        slug: "pino-escandinavo",
-        shortDescription: "Tonos claros estilo nórdico con máximo confort",
-        fullDescription:
-          "Piso de vinilo WPC con acabado en pino escandinavo. Tonos claros y naturales perfectos para espacios modernos y luminosos. Núcleo de espuma para máximo confort.",
-        features: [
-          {
-            name: "Núcleo de Espuma",
-            description: "20% más confortable bajo los pies",
-          },
-          {
-            name: "Reducción de Ruido",
-            description: "Hasta 60% menos ruido de impacto",
-          },
-          {
-            name: "Aislamiento Térmico",
-            description: "Superficie cálida al tacto",
-          },
-          {
-            name: "Instalación Flotante",
-            description: "No requiere adhesivos ni preparación especial",
-          },
+        category: "Instalaciones Especializadas",
+        examples: [
+          "Pisos conductivos en salas de servidores",
+          "Laboratorios y centros de datos",
+          "Áreas con equipos electrónicos sensibles",
         ],
-        specifications: [
-          { label: "Espesor", value: "7.0mm" },
-          { label: "Capa de desgaste", value: "0.5mm (AC4)" },
-          { label: "Dimensiones", value: "1220mm x 183mm" },
-          { label: "Textura", value: "Madera cepillada" },
-          { label: "Instalación", value: "Click con espuma integrada" },
-          { label: "Uso", value: "Residencial" },
-        ],
-        imageUrl: "/products/wpc-pino-escandinavo.jpg",
-        imageAlt: "Piso WPC acabado pino escandinavo",
-        price: {
-          value: 420,
-          unit: "m²",
-          currency: "MXN",
-        },
-        inStock: true,
-        popular: true,
       },
       {
-        id: "wpc-encino-rustico",
-        name: "WPC Encino Rústico",
-        slug: "encino-rustico",
-        shortDescription: "Acabado rústico con nudos y vetas naturales",
-        fullDescription:
-          "Piso de vinilo WPC con acabado en encino rústico. Textura auténtica con nudos y vetas que recrean la madera natural. Ideal para ambientes cálidos y acogedores.",
-        features: [
-          {
-            name: "Textura Auténtica",
-            description: "Nudos y vetas de madera real",
-          },
-          {
-            name: "Cálido al Tacto",
-            description: "Sensación de madera natural",
-          },
-          {
-            name: "Resistente a Mascotas",
-            description: "Resistente a arañazos de mascotas",
-          },
-          {
-            name: "Eco-Friendly",
-            description: "Materiales reciclables 100%",
-          },
+        category: "Instalaciones Generales",
+        examples: [
+          "Pisos vinílicos residenciales y comerciales",
+          "Enchapes de madera y laminados",
+          "Post-formados y acabados",
         ],
-        specifications: [
-          { label: "Espesor", value: "6.5mm" },
-          { label: "Capa de desgaste", value: "0.3mm (AC4)" },
-          { label: "Dimensiones", value: "1210mm x 190mm" },
-          { label: "Textura", value: "Rústica con nudos" },
-          { label: "Instalación", value: "Sistema Click" },
-          { label: "Uso", value: "Residencial" },
-        ],
-        imageUrl: "/products/wpc-encino-rustico.jpg",
-        imageAlt: "Piso WPC acabado encino rústico",
-        price: {
-          value: 390,
-          unit: "m²",
-          currency: "MXN",
-        },
-        inStock: true,
       },
     ],
-  },
-  {
-    id: "lvt",
-    name: "Pisos LVT",
-    slug: "lvt",
-    description:
-      "Luxury Vinyl Tile - Elegancia y versatilidad en diseños premium. Imitan madera y piedra natural con realismo excepcional para espacios de alto nivel.",
-    shortDescription: "Elegancia y diseños premium",
-    iconPath:
-      "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
-    imageUrl: "/products/lvt-category.jpg",
-    imageAlt: "Categoría de pisos LVT",
-    featured: true,
-    order: 3,
     subProducts: [
       {
-        id: "lvt-marmol-carrara",
-        name: "LVT Mármol Carrara",
-        slug: "marmol-carrara",
-        shortDescription: "Elegancia de mármol italiano en vinilo",
+        id: "pegamento-conductivo",
+        name: "Conductivo Antiestático",
+        slug: "pegamento-conductivo",
+        shortDescription: "Adhesivo para pisos conductivos",
         fullDescription:
-          "Piso de vinilo LVT con diseño de mármol Carrara. Acabado premium que imita perfectamente las vetas del mármol italiano. Ideal para espacios elegantes y sofisticados.",
+          "Pegamento conductivo especializado para la instalación de pisos vinílicos conductivos. Diseñado específicamente para garantizar la correcta disipación de la electricidad estática en ambientes que requieren protección de equipos electrónicos sensibles.",
         features: [
           {
-            name: "Diseño Premium",
-            description: "Vetas de mármol ultra realistas",
+            name: "Conductividad Garantizada",
+            description:
+              "Formulación específica para disipar electricidad estática de forma segura",
           },
           {
-            name: "Antideslizante",
-            description: "Superficie segura incluso mojada (R10)",
+            name: "Sistema Integral",
+            description:
+              "Trabaja en conjunto con malla de cobre y conexión a tierra",
           },
           {
-            name: "Fácil Instalación",
-            description: "Sistema adhesivo o flotante",
+            name: "Instalación Especializada",
+            description:
+              "Procedimiento profesional con requisitos técnicos específicos",
           },
           {
-            name: "Resistente a Manchas",
-            description: "Superficie sellada anti-manchas",
+            name: "Seguridad Eléctrica",
+            description:
+              "Medida de seguridad no negociable para proteger equipos y personas",
+          },
+          {
+            name: "Control de Humedad",
+            description:
+              "Compatible con suelos preparados según especificaciones técnicas",
           },
         ],
         specifications: [
-          { label: "Espesor", value: "4.5mm" },
-          { label: "Capa de desgaste", value: "0.5mm (AC5)" },
-          { label: "Dimensiones", value: "457mm x 457mm" },
-          { label: "Textura", value: "Mármol pulido mate" },
-          { label: "Instalación", value: "Adhesiva o Click" },
-          { label: "Uso", value: "Residencial Premium" },
+          { label: "Tipo", value: "Adhesivo conductivo" },
+          { label: "Aplicación", value: "Pisos vinílicos conductivos" },
+          {
+            label: "Requisitos",
+            value: "Cinta de cobre + conexión a tierra",
+          },
+          { label: "Humedad máx.", value: "2.5% en subsuelo" },
+          { label: "Nivelación", value: "Desnivel máx. 3mm en 3m" },
+          {
+            label: "Herramientas",
+            value: "Espátula, pistola calor, cordón soldadura",
+          },
         ],
-        imageUrl: "/products/lvt-marmol-carrara.jpg",
-        imageAlt: "Piso LVT diseño mármol Carrara",
-        price: {
-          value: 650,
-          unit: "m²",
-          currency: "MXN",
-        },
+        imageUrl: "/products/pegamento-conductivo.jpg",
+        imageAlt: "Pegamento Conductivo Antiestático",
         inStock: true,
         popular: true,
       },
       {
-        id: "lvt-madera-recuperada",
-        name: "LVT Madera Recuperada",
-        slug: "madera-recuperada",
-        shortDescription: "Estilo vintage con madera envejecida",
+        id: "pegamento-contacto-pegsa",
+        name: "De Contacto PEGSA",
+        slug: "pegamento-contacto-pegsa",
+        shortDescription: "Adhesivo de contacto multipropósito",
         fullDescription:
-          "Piso de vinilo LVT con diseño de madera recuperada. Acabado vintage que recrea el encanto de maderas antiguas con variaciones de color y textura únicas.",
+          "Adhesivo de contacto formulado en base a cauchos de policloropreno, resinas tacktificantes reactivas, antioxidantes y un sistema de solventes balanceado. Ideal para todo tipo de enchapes y múltiples sustratos.",
         features: [
           {
-            name: "Diseño Único",
-            description: "Cada tabla con variaciones naturales",
+            name: "Formulación Profesional",
+            description:
+              "Base de cauchos de policloropreno con resinas tacktificantes reactivas",
           },
           {
-            name: "Estilo Vintage",
-            description: "Acabado envejecido auténtico",
+            name: "Sistema Antioxidante",
+            description: "Protección contra degradación y mayor durabilidad",
+          },
+          {
+            name: "Solventes Balanceados",
+            description: "Sistema optimizado para mejor aplicación y secado",
           },
           {
             name: "Versatilidad",
-            description: "Combina con múltiples estilos decorativos",
+            description: "Compatible con múltiples tipos de sustratos",
           },
           {
-            name: "Durabilidad",
-            description: "Resistencia comercial AC5",
+            name: "Adhesión Superior",
+            description: "Excelente adherencia en madera, MDF, concreto, y más",
           },
         ],
         specifications: [
-          { label: "Espesor", value: "5.0mm" },
-          { label: "Capa de desgaste", value: "0.5mm (AC5)" },
-          { label: "Dimensiones", value: "1220mm x 180mm" },
-          { label: "Textura", value: "Madera envejecida" },
-          { label: "Instalación", value: "Sistema Click" },
-          { label: "Uso", value: "Residencial y Comercial" },
+          { label: "Tipo", value: "Adhesivo de contacto" },
+          { label: "Base", value: "Cauchos de policloropreno" },
+          { label: "Componentes", value: "Resinas reactivas + antioxidantes" },
+          {
+            label: "Sustratos",
+            value: "Madera, MDF, poliuretano, vinílico, concreto",
+          },
+          { label: "Aplicación", value: "Enchapes y laminados" },
+          { label: "Uso", value: "Todo tipo de enchapes" },
         ],
-        imageUrl: "/products/lvt-madera-recuperada.jpg",
-        imageAlt: "Piso LVT diseño madera recuperada",
-        price: {
-          value: 550,
-          unit: "m²",
-          currency: "MXN",
-        },
+        imageUrl: "/products/pegamento-contacto-pegsa.jpg",
+        imageAlt: "Pegamento de Contacto PEGSA",
         inStock: true,
+      },
+    ],
+  },
+  {
+    id: "zocalos",
+    name: "Zócalos",
+    slug: "zocalos",
+    description:
+      "Perfiles y zócalos de PVC para acabados profesionales y sanitarios.",
+    shortDescription: "Perfiles y acabados",
+    iconPath:
+      "M4 5a1 1 0 011-1h4a1 1 0 010 2H6v10h2a1 1 0 110 2H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 110 2h-2v10h2a1 1 0 110 2h-4a1 1 0 01-1-1V5z",
+    imageUrl: "/products/zocalos-category.jpg",
+    imageAlt: "Categoría de zócalos",
+    featured: true,
+    order: 3,
+    detailedFeatures: [
+      "Diseño Sanitario: Perfiles curvados que eliminan esquinas de 90 grados para evitar acumulación de suciedad y bacterias.",
+      "Alta Resistencia: Fabricados en PVC rígido o PEHD, resistentes a humedad, agua, corrosión y oxidación.",
+      "Fácil Mantenimiento: Superficies lisas de bajo peso que facilitan la limpieza y no requieren mantenimiento constante.",
+      "Flexibilidad de Instalación: Se adaptan a paredes irregulares y pueden calentarse para facilitar su colocación.",
+    ],
+    usageAreas: [
+      {
+        category: "Industria y Salud",
+        examples: [
+          "Plantas de procesamiento de alimentos",
+          "Hospitales, clínicas y laboratorios",
+          "Industria farmacéutica",
+          "Cámaras frigoríficas y almacenes",
+        ],
+      },
+      {
+        category: "Residencial",
+        examples: [
+          "Baños y cocinas",
+          "Áreas húmedas",
+          "Espacios que requieren mayor higiene",
+        ],
+      },
+    ],
+    subProducts: [
+      {
+        id: "contrazocalo-sanitario",
+        name: "Contrazócalo Sanitario de PVC",
+        slug: "contrazocalo-sanitario",
+        shortDescription: "Perfil sanitario para unión piso-pared",
+        fullDescription:
+          "Un contrazócalo sanitario de PVC es un perfil diseñado para sellar la unión entre el piso y la pared, creando una curva que evita la acumulación de suciedad y bacterias, facilitando la limpieza e higiene en áreas que lo requieren.",
+        features: [
+          {
+            name: "Diseño Higiénico",
+            description:
+              "Diseño redondeado o curvado que elimina las esquinas a 90 grados donde se acumulan partículas",
+          },
+          {
+            name: "Material 100% PVC",
+            description:
+              "Fabricado en PVC rígido o de alta densidad (PEHD) para máxima durabilidad",
+          },
+          {
+            name: "Resistencia Superior",
+            description:
+              "Altamente resistente a humedad, agua, corrosión, oxidación e impactos",
+          },
+          {
+            name: "Flexibilidad",
+            description:
+              "Se adapta a paredes irregulares o con curvatura, puede calentarse para facilitar instalación",
+          },
+          {
+            name: "Bajo Mantenimiento",
+            description:
+              "Ligero, fácil de limpiar y no requiere mucho mantenimiento",
+          },
+          {
+            name: "No se Deforma",
+            description:
+              "A diferencia de la madera, no se hincha ni deforma con la humedad",
+          },
+        ],
+        specifications: [
+          { label: "Material", value: "PVC rígido o PEHD 100%" },
+          { label: "Diseño", value: "Curva sanitaria redondeada" },
+          { label: "Peso", value: "Bajo peso" },
+          { label: "Resistencia", value: "Humedad, corrosión, impactos" },
+          { label: "Mantenimiento", value: "Mínimo requerido" },
+          { label: "Instalación", value: "Adhesivo, puede calentarse" },
+        ],
+        imageUrl: "/products/contrazocalo-sanitario.jpg",
+        imageAlt: "Contrazócalo Sanitario de PVC",
+        inStock: true,
+        popular: true,
       },
     ],
   },
@@ -405,137 +448,49 @@ export const productCategories: ProductCategory[] = [
     name: "Accesorios",
     slug: "accesorios",
     description:
-      "Complementos esenciales para instalación profesional. Desde zoclos hasta perfiles de transición y productos de mantenimiento.",
-    shortDescription: "Complementos para instalación",
+      "Accesorios y perfiles especializados para instalaciones profesionales de pisos.",
+    shortDescription: "Perfiles y accesorios",
     iconPath:
-      "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
-    imageUrl: "/products/accessories-category.jpg",
+      "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    imageUrl: "/products/accesorios-category.jpg",
     imageAlt: "Categoría de accesorios",
-    featured: false,
+    featured: true,
     order: 4,
     subProducts: [
       {
-        id: "acc-zoclo-pvc",
-        name: "Zócalo PVC",
-        slug: "zoclo-pvc",
-        shortDescription: "Zócalos en diversos acabados para remate perfecto",
+        id: "capping-strip",
+        name: "Capping Strip",
+        slug: "capping-strip",
+        shortDescription: "Perfiles de transición y remate",
         fullDescription:
-          "Zócalos de PVC de alta calidad disponibles en múltiples acabados para combinar con tu piso de vinilo. Fácil instalación con sistema de clip o adhesivo.",
+          "El Capping Strip es un perfil de transición profesional diseñado para rematar y sellar instalaciones de pisos, proporcionando un acabado estético y funcional en áreas de transición entre diferentes superficies.",
         features: [
           {
-            name: "Varios Acabados",
-            description: "Disponible en todos los acabados de pisos",
+            name: "Acabado Profesional",
+            description: "Remate estético para transiciones de piso",
           },
           {
             name: "Fácil Instalación",
-            description: "Sistema de clip o adhesivo",
-          },
-          {
-            name: "Flexible",
-            description: "Se adapta a irregularidades de pared",
-          },
-          {
-            name: "Resistente",
-            description: "No se deforma ni decolora",
-          },
-        ],
-        specifications: [
-          { label: "Alto", value: "60mm o 80mm" },
-          { label: "Longitud", value: "2400mm" },
-          { label: "Material", value: "PVC de alta densidad" },
-          { label: "Instalación", value: "Clip o adhesivo" },
-        ],
-        imageUrl: "/products/acc-zoclo-pvc.jpg",
-        imageAlt: "Zócalo PVC para pisos de vinilo",
-        price: {
-          value: 85,
-          unit: "pieza",
-          currency: "MXN",
-        },
-        inStock: true,
-      },
-      {
-        id: "acc-perfiles-transicion",
-        name: "Perfiles de Transición",
-        slug: "perfiles-transicion",
-        shortDescription: "Perfiles para uniones y cambios de nivel",
-        fullDescription:
-          "Perfiles de transición en aluminio y PVC para uniones perfectas entre diferentes pisos o desniveles. Disponibles en múltiples acabados.",
-        features: [
-          {
-            name: "Versatilidad",
-            description: "Para todo tipo de transiciones",
-          },
-          {
-            name: "Acabados Premium",
-            description: "Aluminio anodizado y PVC",
-          },
-          {
-            name: "Instalación Simple",
-            description: "Incluye kit de instalación",
+            description: "Sistema de fijación rápido y seguro",
           },
           {
             name: "Durabilidad",
-            description: "Resistente al tráfico intenso",
+            description: "Resistente al tráfico y desgaste",
+          },
+          {
+            name: "Versatilidad",
+            description: "Compatible con múltiples tipos de pisos",
           },
         ],
         specifications: [
-          { label: "Longitud", value: "900mm o 2700mm" },
-          { label: "Material", value: "Aluminio o PVC" },
-          { label: "Tipos", value: "Recto, reducción, escalera" },
-          { label: "Instalación", value: "Atornillado o adhesivo" },
+          { label: "Material", value: "Aluminio/PVC" },
+          { label: "Uso", value: "Transiciones de piso" },
+          { label: "Instalación", value: "Adhesivo o mecánica" },
+          { label: "Acabados", value: "Múltiples colores" },
         ],
-        imageUrl: "/products/acc-perfiles-transicion.jpg",
-        imageAlt: "Perfiles de transición para pisos",
-        price: {
-          value: 120,
-          unit: "pieza",
-          currency: "MXN",
-        },
+        imageUrl: "/products/capping-strip.jpg",
+        imageAlt: "Capping Strip - Perfil de transición",
         inStock: true,
-      },
-      {
-        id: "acc-kit-limpieza",
-        name: "Kit de Limpieza Profesional",
-        slug: "kit-limpieza",
-        shortDescription: "Productos especializados para mantenimiento",
-        fullDescription:
-          "Kit completo de limpieza y mantenimiento para pisos de vinilo. Incluye limpiador concentrado, mopa de microfibra y protector de brillo.",
-        features: [
-          {
-            name: "Fórmula Especializada",
-            description: "Desarrollada específicamente para vinilo",
-          },
-          {
-            name: "No Deja Residuos",
-            description: "Secado rápido sin marcas",
-          },
-          {
-            name: "Protección Extra",
-            description: "Capa protectora que alarga la vida del piso",
-          },
-          {
-            name: "Eco-Friendly",
-            description: "Fórmula biodegradable",
-          },
-        ],
-        specifications: [
-          {
-            label: "Contenido",
-            value: "Limpiador 1L + Mopa + Protector 500ml",
-          },
-          { label: "Rendimiento", value: "Hasta 100m² por botella" },
-          { label: "Uso", value: "Mensual recomendado" },
-        ],
-        imageUrl: "/products/acc-kit-limpieza.jpg",
-        imageAlt: "Kit de limpieza profesional para pisos de vinilo",
-        price: {
-          value: 450,
-          unit: "kit",
-          currency: "MXN",
-        },
-        inStock: true,
-        popular: true,
       },
     ],
   },

@@ -1,0 +1,273 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { productCategories, type SubProduct } from "../../../data/products";
+import Header from "../../../components/layout/Header.astro";
+import Footer from "../../../components/layout/Footer.astro";
+
+// Generar rutas estáticas solo para productos de zócalos
+export async function getStaticPaths() {
+  const zocalosCategory = productCategories.find(
+    (cat) => cat.slug === "zocalos",
+  );
+
+  if (!zocalosCategory) {
+    return [];
+  }
+
+  return zocalosCategory.subProducts.map((subProduct) => ({
+    params: { slug: subProduct.slug },
+    props: { subProduct },
+  }));
+}
+
+interface Props {
+  subProduct: SubProduct;
+}
+
+const { subProduct } = Astro.props;
+
+const categoryName = "Zócalos";
+const categorySlug = "zocalos";
+
+// Obtener otros zócalos
+const zocalosCategory = productCategories.find((cat) => cat.slug === "zocalos");
+const relatedProducts =
+  zocalosCategory?.subProducts.filter((p) => p.slug !== subProduct.slug) || [];
+---
+
+<Layout
+  title={`${subProduct.name} - ${categoryName} - Vinílicos JJ`}
+  description={subProduct.fullDescription}
+  keywords={`${subProduct.name}, ${categoryName}, perfiles sanitarios, acabados PVC`}
+>
+  <Header />
+
+  <!-- Hero Section - Diseño especializado para Zócalos -->
+  <section class="bg-linear-to-br from-amber-50 to-stone-50 py-12 md:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header con Badge y Título -->
+      <div class="text-center mb-8">
+        <div class="inline-block mb-4">
+          <span
+            class="px-4 py-2 bg-amber-800 text-white text-sm font-semibold rounded-full"
+          >
+            {categoryName}
+          </span>
+        </div>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+        >
+          {subProduct.name}
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed"
+        >
+          {subProduct.fullDescription}
+        </p>
+      </div>
+
+      <!-- Imagen Destacada -->
+      <div class="max-w-3xl mx-auto mb-12">
+        <div
+          class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-stone-200"
+        >
+          <img
+            src={subProduct.imageUrl}
+            alt={subProduct.imageAlt}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Contenido Organizado -->
+      <div class="max-w-5xl mx-auto">
+        <!-- Características -->
+        {
+          subProduct.features && subProduct.features.length > 0 && (
+            <div class="mb-12">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+                Características Principales
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {subProduct.features.map((feature) => (
+                  <div class="flex items-start gap-3 bg-white p-4 rounded-lg shadow-sm border border-stone-100">
+                    <svg
+                      class="w-5 h-5 text-amber-800 shrink-0 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <div>
+                      <h3 class="font-bold text-gray-900 text-sm mb-1">
+                        {feature.name}
+                      </h3>
+                      <p class="text-gray-700 text-sm">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <!-- Especificaciones Técnicas -->
+        {
+          subProduct.specifications && subProduct.specifications.length > 0 && (
+            <div class="mb-12">
+              <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center">
+                Especificaciones Técnicas
+              </h2>
+              <div class="bg-white rounded-xl shadow-sm border border-stone-100 p-6 max-w-2xl mx-auto">
+                <div class="space-y-3">
+                  {subProduct.specifications.map((spec) => (
+                    <div class="flex justify-between items-start pb-3 border-b border-stone-100 last:border-0 last:pb-0">
+                      <span class="text-gray-600 text-sm font-medium">
+                        {spec.label}
+                      </span>
+                      <span class="font-semibold text-gray-900 text-sm text-right">
+                        {spec.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+        <!-- Precio y Disponibilidad -->
+        {
+          subProduct.price && (
+            <div class="mb-12 text-center">
+              <div class="inline-block bg-white rounded-xl shadow-sm border border-stone-100 p-6">
+                <div class="mb-2">
+                  <span class="text-4xl font-bold text-amber-800">
+                    ${subProduct.price.value}
+                  </span>
+                  <span class="text-gray-600 text-lg ml-2">
+                    {subProduct.price.currency} / {subProduct.price.unit}
+                  </span>
+                </div>
+                {subProduct.inStock && (
+                  <div class="flex items-center justify-center gap-2 text-green-600">
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="font-semibold">Disponible en Stock</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        }
+
+        <!-- CTA Button -->
+        <div class="text-center">
+          <a
+            href="#contacto"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-amber-800 text-white font-bold rounded-lg shadow-lg hover:bg-amber-900 hover:shadow-xl hover:scale-105 transition-all"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path>
+            </svg>
+            Solicitar Cotización
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos Relacionados -->
+  {
+    relatedProducts.length > 0 && (
+      <section class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Otros Productos de {categoryName}
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              Descubre más opciones en nuestra línea de{" "}
+              {categoryName.toLowerCase()}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            {relatedProducts.map((product) => (
+              <a
+                href={`/productos/${categorySlug}/${product.slug}`}
+                class="group bg-white border border-stone-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-amber-800 transition-all duration-300"
+              >
+                <div class="aspect-4/3 bg-stone-100 overflow-hidden relative">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.imageAlt}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  {product.popular && (
+                    <div class="absolute top-3 right-3">
+                      <span class="px-3 py-1 bg-amber-800 text-white text-xs font-bold rounded-full shadow-lg">
+                        Popular
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div class="p-5">
+                  <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-amber-800 transition-colors">
+                    {product.name}
+                  </h3>
+                  <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+                    {product.shortDescription}
+                  </p>
+                  <div class="flex items-center gap-2 text-sm font-semibold text-amber-800 group-hover:gap-3 transition-all">
+                    Ver detalles
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <Footer />
+</Layout>

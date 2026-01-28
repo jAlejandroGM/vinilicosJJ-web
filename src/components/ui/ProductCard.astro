@@ -1,0 +1,85 @@
+---
+import type { SubProduct } from "../../data/products";
+
+interface Props {
+  product: SubProduct;
+  categorySlug: string;
+}
+
+const { product, categorySlug } = Astro.props;
+---
+
+<a
+  href={`/productos/${categorySlug}/${product.slug}`}
+  class="group p-6 bg-white border border-stone-200 rounded-xl overflow-hidden hover:shadow-xl hover:border-amber-800 transition-all duration-300"
+>
+  <!-- Imagen del Producto -->
+  <div class="aspect-4/3 bg-stone-100 overflow-hidden relative">
+    <img
+      src={product.imageUrl}
+      alt={product.imageAlt}
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+    />
+    {
+      product.popular && (
+        <div class="absolute top-3 right-3">
+          <span class="px-3 py-1 bg-amber-800 text-white text-xs font-bold rounded-full shadow-lg">
+            Popular
+          </span>
+        </div>
+      )
+    }
+    {
+      product.inStock && (
+        <div class="absolute top-3 left-3">
+          <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold rounded-full shadow-lg">
+            Disponible
+          </span>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Información del Producto -->
+  <div class="p-5">
+    <h3
+      class="text-lg font-bold text-gray-900 mb-2 group-hover:text-amber-800 transition-colors"
+    >
+      {product.name}
+    </h3>
+    <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+      {product.shortDescription}
+    </p>
+
+    <!-- Especificaciones Rápidas -->
+    <div class="space-y-2 mb-4">
+      {
+        product.specifications.slice(0, 2).map((spec) => (
+          <div class="flex justify-between text-xs">
+            <span class="text-gray-600">{spec.label}:</span>
+            <span class="font-semibold text-gray-900">{spec.value}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Link con icono -->
+    <div
+      class="flex items-center gap-2 text-sm font-semibold text-amber-800 group-hover:gap-3 transition-all"
+    >
+      Ver detalles
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+      </svg>
+    </div>
+  </div>
+</a>
