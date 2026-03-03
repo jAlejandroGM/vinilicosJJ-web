@@ -2,7 +2,6 @@
 interface Props {
   title?: string;
   subtitle?: string;
-  description?: string;
   primaryCta?: {
     text: string;
     href: string;
@@ -22,7 +21,6 @@ const whatsappMessage = encodeURIComponent(
 
 const {
   title = "Transforma tus espacios con pisos de vinilo de alta calidad",
-  description = "Especialistas en instalación profesional de pisos de vinilo. Soluciones duraderas, elegantes y resistentes para tu hogar o negocio.",
   primaryCta = {
     text: "Ver Proyectos",
     href: "/proyectos",
@@ -51,11 +49,6 @@ const {
         >
           {title}
         </h1>
-
-        <!-- Description -->
-        <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
-          {description}
-        </p>
 
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row gap-4">
@@ -119,37 +112,6 @@ const {
               )
             }
           </a>
-        </div>
-
-        <!-- Features/Benefits -->
-        <div class="mt-12 grid grid-cols-3 gap-6">
-          <div class="text-center">
-            <div
-              class="text-3xl md:text-4xl font-bold text-amber-800 mb-2"
-              aria-label="Más de 10 años de experiencia"
-            >
-              10+
-            </div>
-            <div class="text-sm text-gray-600">Años de experiencia</div>
-          </div>
-          <div class="text-center">
-            <div
-              class="text-3xl md:text-4xl font-bold text-amber-800 mb-2"
-              aria-label="Más de 500 proyectos completados"
-            >
-              500+
-            </div>
-            <div class="text-sm text-gray-600">Proyectos completados</div>
-          </div>
-          <div class="text-center">
-            <div
-              class="text-3xl md:text-4xl font-bold text-amber-800 mb-2"
-              aria-label="100% de satisfacción garantizada"
-            >
-              100%
-            </div>
-            <div class="text-sm text-gray-600">Satisfacción</div>
-          </div>
         </div>
       </div>
 

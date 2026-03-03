@@ -49,10 +49,18 @@ const {
 } = Astro.props;
 ---
 
-<section class="py-16 md:py-24 bg-white" aria-labelledby="about-title">
+<section
+  class="py-16 md:py-24 bg-linear-to-br from-amber-50 to-stone-50"
+  aria-labelledby="about-title"
+>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Encabezado de sección -->
     <div class="max-w-3xl mx-auto text-center mb-16">
+      <span
+        class="inline-block px-4 py-2 bg-amber-800 text-white text-sm font-semibold rounded-full mb-6"
+      >
+        Conócenos
+      </span>
       <h2
         id="about-title"
         class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
@@ -142,50 +150,6 @@ const {
               </div>
             ))
           }
-        </div>
-      </div>
-    </div>
-
-    <!-- Valores o estadísticas adicionales -->
-    <div
-      class="bg-linear-to-r from-amber-800 to-amber-900 rounded-2xl p-8 md:p-12"
-    >
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div
-            class="text-4xl md:text-5xl font-bold text-white mb-2"
-            aria-label="Más de 500 clientes satisfechos"
-          >
-            500+
-          </div>
-          <div class="text-amber-100 font-medium">Clientes Satisfechos</div>
-        </div>
-        <div class="text-center">
-          <div
-            class="text-4xl md:text-5xl font-bold text-white mb-2"
-            aria-label="Más de 1000 metros cuadrados instalados"
-          >
-            1000+
-          </div>
-          <div class="text-amber-100 font-medium">m² Instalados</div>
-        </div>
-        <div class="text-center">
-          <div
-            class="text-4xl md:text-5xl font-bold text-white mb-2"
-            aria-label="10 años de garantía"
-          >
-            10
-          </div>
-          <div class="text-amber-100 font-medium">Años de Garantía</div>
-        </div>
-        <div class="text-center">
-          <div
-            class="text-4xl md:text-5xl font-bold text-white mb-2"
-            aria-label="98% de tasa de recomendación"
-          >
-            98%
-          </div>
-          <div class="text-amber-100 font-medium">Recomendación</div>
         </div>
       </div>
     </div>

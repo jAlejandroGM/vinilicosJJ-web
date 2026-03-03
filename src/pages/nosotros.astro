@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+import About from "../components/sections/About.astro";
+import MisionVision from "../components/sections/MisionVision.astro";
+import CTA from "../components/sections/CTA.astro";
+---
+
+<Layout
+  title="Nosotros - Vinílicos JJ"
+  description="Conoce nuestra historia, misión y visión. Más de 10 años transformando espacios con pisos de vinilo de alta calidad en Perú."
+  keywords="sobre nosotros, quiénes somos, vinílicos JJ, historia, misión, visión, equipo profesional"
+>
+  <Header />
+
+  <main id="main-content" role="main">
+    <About />
+    <MisionVision />
+  </main>
+
+  <CTA />
+  <Footer />
+</Layout>

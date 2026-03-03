@@ -28,6 +28,20 @@ export const ctaContent: CTAConfig = {
     ],
   },
 
+  // Página Nosotros
+  "/nosotros": {
+    title: "¿Quieres Conocernos Mejor?",
+    description:
+      "Contáctanos y descubre por qué somos la mejor opción para tu proyecto de pisos. Nuestro equipo está listo para atenderte.",
+    buttonText: "Contáctanos",
+    buttonHref: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("¡Hola Vinílicos J&J! 👋\n\nMe gustaría conocer más sobre su empresa.\n\n¿Podrían brindarme información?\n\nGracias.")}`,
+    features: [
+      "Atención personalizada",
+      "Respuesta rápida",
+      "Asesoría sin compromiso",
+    ],
+  },
+
   // Página de servicios
   "/servicios": {
     title: "¿Listo para Comenzar tu Proyecto?",

@@ -4,6 +4,7 @@ import { getProductNavigation } from "../../data/products";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
+  { href: "/nosotros", label: "Nosotros" },
   { href: "/servicios", label: "Servicios" },
   { href: "/proyectos", label: "Proyectos" },
 ];
@@ -59,7 +60,7 @@ const isProductsActive = currentPath.startsWith("/productos");
       <div class="hidden md:flex items-center gap-1 flex-1 justify-end">
         <nav class="flex items-center gap-1" aria-label="Navegación principal">
           {
-            navLinks.slice(0, 1).map(({ href, label }) => {
+            navLinks.slice(0, 2).map(({ href, label }) => {
               const isActive = currentPath === href;
               return (
                 <a
@@ -85,7 +86,7 @@ const isProductsActive = currentPath.startsWith("/productos");
           />
 
           {
-            navLinks.slice(1).map(({ href, label }) => {
+            navLinks.slice(2).map(({ href, label }) => {
               const isActive =
                 currentPath === href ||
                 (href !== "/" && currentPath.startsWith(href));
@@ -154,9 +155,9 @@ const isProductsActive = currentPath.startsWith("/productos");
       aria-label="Navegación móvil"
     >
       <div class="flex flex-col gap-2">
-        <!-- Inicio -->
+        <!-- Inicio y Nosotros -->
         {
-          navLinks.slice(0, 1).map(({ href, label }) => {
+          navLinks.slice(0, 2).map(({ href, label }) => {
             const isActive = currentPath === href;
             return (
               <a
@@ -238,7 +239,7 @@ const isProductsActive = currentPath.startsWith("/productos");
 
         <!-- Otros Links -->
         {
-          navLinks.slice(1).map(({ href, label }) => {
+          navLinks.slice(2).map(({ href, label }) => {
             const isActive =
               currentPath === href ||
               (href !== "/" && currentPath.startsWith(href));
