@@ -20,23 +20,23 @@ const {
   mission = {
     title: "Nuestra Misión",
     description:
-      "Proporcionar soluciones de pisos de vinilo de la más alta calidad, combinando innovación, diseño y servicio excepcional. Nos comprometemos a transformar espacios con productos duraderos que superen las expectativas de nuestros clientes.",
+      "Brindamos servicios de instalación de pisos vinílicos de alta calidad, trabajando con compromiso, responsabilidad y atención al detalle en cada proyecto. Nuestro objetivo es transformar espacios con acabados duraderos y funcionales, superando las expectativas de quienes confían en nuestro trabajo.",
     values: [
-      "Calidad sin compromisos",
-      "Servicio personalizado",
-      "Innovación constante",
-      "Sostenibilidad",
+      "Calidad en cada detalle",
+      "Puntualidad y compromiso",
+      "Trabajo responsable",
+      "Atención cercana y personalizada",
     ],
   },
   vision = {
     title: "Nuestra Visión",
     description:
-      "Ser la empresa líder en México en soluciones de pisos de vinilo, reconocida por nuestra excelencia, innovación y compromiso con la satisfacción del cliente. Aspiramos a crear espacios que inspiren y perduren.",
+      "Aspiramos a consolidarnos como una empresa referente en instalación de pisos vinílicos, reconocida por la calidad de nuestro trabajo, la confianza de nuestros clientes y la mejora constante en cada proyecto que realizamos.",
     goals: [
-      "Liderazgo en el mercado",
-      "Expansión nacional",
-      "Tecnología de vanguardia",
-      "Clientes satisfechos",
+      "Crecer de manera sostenida",
+      "Mantener altos estándares de calidad",
+      "Construir relaciones de confianza",
+      "Evolucionar junto a nuestros clientes",
     ],
   },
 } = Astro.props;
@@ -64,7 +64,7 @@ const {
     <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
       <!-- Misión -->
       <article
-        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100"
+        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100 min-h-125 md:min-h-140 lg:min-h-125"
       >
         <!-- Icono decorativo -->
         <div class="absolute top-8 right-8 opacity-10" aria-hidden="true">
@@ -79,37 +79,39 @@ const {
           </svg>
         </div>
 
-        <div class="relative z-10">
-          <!-- Icono principal -->
-          <div
-            class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
-          >
-            <svg
-              class="w-8 h-8 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <!-- Parte superior: Icono y Contenido -->
+          <div>
+            <!-- Icono principal -->
+            <div
+              class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              ></path>
-            </svg>
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
+              </svg>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              {mission.title}
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {mission.description}
+            </p>
           </div>
 
-          <!-- Contenido -->
-          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            {mission.title}
-          </h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            {mission.description}
-          </p>
-
           <!-- Valores -->
-          <div class="space-y-3">
+          <div class="mt-6">
             <h4
               class="text-sm font-semibold text-amber-800 uppercase tracking-wider mb-4"
             >
@@ -144,7 +146,7 @@ const {
 
       <!-- Visión -->
       <article
-        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100"
+        class="relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-stone-100 min-h-125 md:min-h-140 lg:min-h-125"
       >
         <!-- Icono decorativo -->
         <div class="absolute top-8 right-8 opacity-10" aria-hidden="true">
@@ -159,37 +161,39 @@ const {
           </svg>
         </div>
 
-        <div class="relative z-10">
-          <!-- Icono principal -->
-          <div
-            class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
-          >
-            <svg
-              class="w-8 h-8 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <!-- Parte superior: Icono y Contenido -->
+          <div>
+            <!-- Icono principal -->
+            <div
+              class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              ></path>
-            </svg>
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                ></path>
+              </svg>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              {vision.title}
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {vision.description}
+            </p>
           </div>
 
-          <!-- Contenido -->
-          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            {vision.title}
-          </h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            {vision.description}
-          </p>
-
           <!-- Objetivos -->
-          <div class="space-y-3">
+          <div class="mt-6">
             <h4
               class="text-sm font-semibold text-amber-800 uppercase tracking-wider mb-4"
             >

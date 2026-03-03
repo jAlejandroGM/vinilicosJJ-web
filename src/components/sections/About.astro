@@ -9,6 +9,7 @@ interface Props {
   title?: string;
   subtitle?: string;
   description?: string;
+  additionalDescription?: string;
   features?: Feature[];
   imageUrl?: string;
   imageAlt?: string;
@@ -16,32 +17,33 @@ interface Props {
 
 const {
   title = "Sobre Nosotros",
-  subtitle = "Expertos en pisos de vinilo desde hace más de 10 años",
-  description = "En Vinílicos JJ nos especializamos en transformar espacios con soluciones de pisos de vinilo de alta calidad. Nuestro compromiso es ofrecer productos duraderos, instalación profesional y un servicio personalizado que supere las expectativas de nuestros clientes.",
+  subtitle = "Especialistas en instalación de pisos vinílicos a domicilio",
+  description = "Vinílicos J&J es una empresa especializada en la instalación de pisos vinílicos a domicilio, enfocada en brindar un servicio práctico, moderno y de alta calidad. Contamos con un equipo de trabajo especializado que cuida cada detalle del proceso, desde la preparación del espacio hasta el acabado final, garantizando un resultado limpio, resistente y de alta calidad.",
+  additionalDescription = "Nos caracterizamos por nuestra responsabilidad, puntualidad y atención personalizada, adaptándonos a las necesidades de cada cliente y ofreciendo asesoría para elegir el piso ideal según el espacio y el uso. Nuestro objetivo es transformar ambientes con materiales de calidad y un servicio confiable, logrando espacios funcionales y con un diseño que marque la diferencia.",
   features = [
     {
       icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
       title: "Calidad Garantizada",
       description:
-        "Trabajamos únicamente con marcas líderes y materiales certificados que garantizan durabilidad y resistencia.",
+        "Trabajamos con materiales de alta calidad y cuidamos cada detalle para asegurar pisos resistentes, duraderos y con excelente acabado.",
     },
     {
       icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
       title: "Equipo Profesional",
       description:
-        "Nuestros instaladores están certificados y cuentan con años de experiencia en el sector de pisos de vinilo.",
+        "Contamos con personal capacitado y con experiencia en instalación de pisos vinílicos, garantizando un trabajo limpio y preciso.",
     },
     {
       icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
-      title: "Entrega Rápida",
+      title: "Cumplimiento y Puntualidad",
       description:
-        "Nos comprometemos a cumplir con los tiempos acordados, respetando tu agenda y presupuesto.",
+        "Respetamos los tiempos acordados y entregamos cada proyecto con responsabilidad y compromiso.",
     },
     {
       icon: "M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
       title: "Atención Personalizada",
       description:
-        "Asesoramos en cada paso del proceso, desde la selección hasta el mantenimiento de tu piso.",
+        "Brindamos asesoría según las necesidades de cada cliente, ayudando a elegir la mejor opción para cada espacio.",
     },
   ],
   imageUrl = "/about-image.jpg",
@@ -70,8 +72,11 @@ const {
       <p class="text-xl text-amber-800 font-semibold mb-6">
         {subtitle}
       </p>
-      <p class="text-lg text-gray-600 leading-relaxed">
+      <p class="text-lg text-gray-600 leading-relaxed mb-4">
         {description}
+      </p>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        {additionalDescription}
       </p>
     </div>
 
@@ -108,14 +113,6 @@ const {
             loading="lazy"
             decoding="async"
           /> -->
-
-          <!-- Badge flotante -->
-          <div
-            class="absolute top-6 right-6 bg-amber-800 text-white px-4 py-2 rounded-lg font-semibold shadow-lg"
-          >
-            <div class="text-2xl font-bold">10+</div>
-            <div class="text-xs">Años</div>
-          </div>
         </div>
       </div>
 
@@ -124,7 +121,7 @@ const {
         <div class="grid sm:grid-cols-2 gap-6">
           {
             features.map((feature) => (
-              <div class="bg-gray-50 rounded-xl p-6 hover:bg-stone-100 hover:shadow-md transition-all duration-300 group">
+              <div class="bg-white rounded-xl p-6 shadow-md border-2 border-amber-800/10 hover:border-amber-800/30 hover:shadow-lg transition-all duration-300 group">
                 <div class="w-12 h-12 bg-amber-800 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <svg
                     class="w-6 h-6 text-white"

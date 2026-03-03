@@ -66,7 +66,7 @@ export const ctaContent: CTAConfig = {
     features: [
       "Portafolio comprobado",
       "Garantía de calidad",
-      "Experiencia de 10+ años",
+      "Equipo especializado",
     ],
   },
 

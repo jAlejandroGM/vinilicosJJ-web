@@ -2,7 +2,7 @@
 interface Props {
   icon: string;
   title: string;
-  description: string;
+  description?: string;
   size?: "sm" | "md";
 }
 
@@ -15,7 +15,7 @@ const titleClasses = size === "sm" ? "text-sm" : "text-sm";
 const descClasses = size === "sm" ? "text-xs" : "text-xs";
 ---
 
-<div class={`flex items-start ${containerClasses}`}>
+<div class={`flex items-center ${containerClasses}`}>
   <div
     class={`${iconBoxClasses} bg-amber-800 rounded-lg flex items-center justify-center shrink-0`}
   >
@@ -36,8 +36,10 @@ const descClasses = size === "sm" ? "text-xs" : "text-xs";
     <h3 class={`font-semibold text-gray-900 ${titleClasses}`}>
       {title}
     </h3>
-    <p class={`text-gray-600 mt-0.5 ${descClasses}`}>
-      {description}
-    </p>
+    {
+      description && (
+        <p class={`text-gray-600 mt-0.5 ${descClasses}`}>{description}</p>
+      )
+    }
   </div>
 </div>

@@ -1,67 +1,20 @@
 ---
-interface Product {
-  name: string;
-  category: string;
-  description: string;
-  features: string[];
-  imageUrl: string;
-  imageAlt: string;
-}
+import { productCategories } from "../../data/products";
 
 interface Props {
   title?: string;
   subtitle?: string;
-  products?: Product[];
 }
 
 const {
   title = "Productos Destacados",
   subtitle = "Descubre nuestras líneas premium de pisos de vinilo",
-  products = [
-    {
-      name: "Pisos SPC",
-      category: "Stone Plastic Composite",
-      description:
-        "Máxima resistencia y durabilidad. Ideal para áreas de alto tráfico y espacios comerciales.",
-      features: [
-        "100% impermeable",
-        "Alta resistencia al desgaste",
-        "Instalación click",
-        "Garantía 25 años",
-      ],
-      imageUrl: "/products/spc.jpg",
-      imageAlt: "Piso vinílico SPC",
-    },
-    {
-      name: "Pisos WPC",
-      category: "Wood Plastic Composite",
-      description:
-        "Confort y calidez. Perfectos para hogares que buscan estética natural con tecnología moderna.",
-      features: [
-        "Núcleo de espuma",
-        "Reducción de ruido",
-        "Textura natural",
-        "Fácil mantenimiento",
-      ],
-      imageUrl: "/products/wpc.jpg",
-      imageAlt: "Piso vinílico WPC",
-    },
-    {
-      name: "Pisos LVT",
-      category: "Luxury Vinyl Tile",
-      description:
-        "Elegancia y versatilidad. Diseños premium que imitan madera y piedra natural con realismo excepcional.",
-      features: [
-        "Diseños premium",
-        "Antideslizante",
-        "Resistente a manchas",
-        "Variedad de acabados",
-      ],
-      imageUrl: "/products/lvt.jpg",
-      imageAlt: "Piso vinílico LVT",
-    },
-  ],
 } = Astro.props;
+
+// Obtener categorías destacadas ordenadas
+const featuredCategories = productCategories
+  .filter((cat) => cat.featured)
+  .sort((a, b) => a.order - b.order);
 ---
 
 <section class="py-16 md:py-24 bg-white" aria-labelledby="products-title">
@@ -80,13 +33,13 @@ const {
     </div>
 
     <!-- Grid de productos -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
       {
-        products.map((product) => (
+        featuredCategories.map((category) => (
           <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             <!-- Imagen -->
             <div class="relative aspect-4/3 bg-linear-to-br from-stone-100 to-stone-200">
-              <!-- Placeholder -->
+              <!-- Placeholder con icono de categoría -->
               <div class="absolute inset-0 flex items-center justify-center">
                 <svg
                   class="w-16 h-16 text-stone-400"
@@ -99,64 +52,36 @@ const {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="1.5"
-                    d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"
+                    d={category.iconPath}
                   />
                 </svg>
               </div>
 
               <!-- Imagen real (cuando esté disponible) -->
               <!-- <img
-                src={product.imageUrl}
-                alt={product.imageAlt}
+                src={category.imageUrl}
+                alt={category.imageAlt}
                 class="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
               /> -->
-
-              <!-- Badge de categoría -->
-              <div class="absolute top-4 left-4 bg-amber-800 text-white px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider">
-                {product.category}
-              </div>
             </div>
 
             <!-- Contenido -->
             <div class="p-6">
-              <h3 class="text-2xl font-bold text-gray-900 mb-3">
-                {product.name}
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                {category.name}
               </h3>
-              <p class="text-gray-600 leading-relaxed mb-6">
-                {product.description}
+              <p class="text-gray-600 leading-relaxed mb-6 line-clamp-3">
+                {category.description}
               </p>
-
-              <!-- Características -->
-              <ul class="space-y-2 mb-6" role="list">
-                {product.features.map((feature) => (
-                  <li class="flex items-center gap-2 text-sm text-gray-700">
-                    <svg
-                      class="w-5 h-5 text-amber-800 shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
 
               <!-- CTA -->
               <a
-                href={`/productos/${product.name.toLowerCase().replace(/\s+/g, "-").replace("pisos-", "")}`}
+                href={`/productos/${category.slug}`}
                 class="inline-flex items-center justify-center w-full px-6 py-3 text-base font-semibold text-amber-800 bg-amber-50 rounded-lg hover:bg-amber-100 transition-colors"
               >
-                Ver más detalles
+                Ver detalles
                 <svg
                   class="w-5 h-5 ml-2"
                   fill="none"
