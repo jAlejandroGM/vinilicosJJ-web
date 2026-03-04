@@ -1,10 +1,10 @@
 ---
 interface Service {
-  icon: string;
   title: string;
   description: string;
   benefits: string[];
   href: string;
+  images: string[];
 }
 
 interface Props {
@@ -18,7 +18,6 @@ const {
   subtitle = "Soluciones integrales para tu proyecto de pisos",
   services = [
     {
-      icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
       title: "Instalación de Pisos Vinílicos",
       description:
         "Realizamos la instalación profesional de distintos tipos de pisos vinílicos, asegurando un acabado preciso, resistente y duradero.",
@@ -28,9 +27,13 @@ const {
         "Piso vinílico SPC",
       ],
       href: "/servicios",
+      images: [
+        "/services/instalacion-1.jpg",
+        "/services/instalacion-2.jpg",
+        "/services/instalacion-3.jpg",
+      ],
     },
     {
-      icon: "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z",
       title: "Aplicación de Alisado",
       description:
         "Preparamos y nivelamos las superficies para garantizar una correcta instalación del piso y un mejor acabado final.",
@@ -40,9 +43,13 @@ const {
         "Mejora de adherencia",
       ],
       href: "/servicios",
+      images: [
+        "/services/alisado-1.jpg",
+        "/services/alisado-2.jpg",
+        "/services/alisado-3.jpg",
+      ],
     },
     {
-      icon: "M4 5a1 1 0 011-1h4a1 1 0 010 2H6v10h2a1 1 0 110 2H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 110 2h-2v10h2a1 1 0 110 2h-4a1 1 0 01-1-1V5z",
       title: "Instalación de Zócalo Sanitario",
       description:
         "Instalamos zócalos sanitarios para lograr un acabado limpio, funcional e higiénico, acorde a los requerimientos del espacio.",
@@ -52,9 +59,13 @@ const {
         "Integración con el piso",
       ],
       href: "/servicios",
+      images: [
+        "/services/zocalo-1.jpg",
+        "/services/zocalo-2.jpg",
+        "/services/zocalo-3.jpg",
+      ],
     },
     {
-      icon: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z",
       title: "Venta de Materiales",
       description:
         "Ofrecemos la venta de materiales complementarios para la instalación de pisos, seleccionados por su calidad y buen desempeño.",
@@ -64,6 +75,11 @@ const {
         "Materiales complementarios",
       ],
       href: "/servicios",
+      images: [
+        "/services/materiales-1.jpg",
+        "/services/materiales-2.jpg",
+        "/services/materiales-3.jpg",
+      ],
     },
   ],
 } = Astro.props;
@@ -88,83 +104,84 @@ const {
     <div class="grid md:grid-cols-2 gap-8">
       {
         services.map((service, index) => (
-          <article class="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group border border-stone-100">
-            {/* Icono */}
-            <div class="w-16 h-16 bg-amber-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <svg
-                class="w-8 h-8 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+          <article
+            class="service-carousel relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group min-h-96"
+            data-carousel-index={index}
+          >
+            {/* Carousel de imágenes como fondo */}
+            {service.images.map((image, imgIndex) => (
+              <div
+                class={`carousel-slide absolute inset-0 transition-opacity duration-700 ${
+                  imgIndex === 0 ? "opacity-100" : "opacity-0"
+                }`}
+                data-slide={imgIndex}
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d={service.icon}
+                <img
+                  src={image}
+                  alt={`${service.title} - Imagen ${imgIndex + 1}`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
                 />
-              </svg>
-            </div>
+              </div>
+            ))}
+
+            {/* Overlay oscuro */}
+            <div class="absolute inset-0 bg-black/60 z-10" />
 
             {/* Contenido */}
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">
-              {service.title}
-            </h3>
-            <p class="text-gray-600 leading-relaxed mb-6">
-              {service.description}
-            </p>
+            <div class="relative z-20 p-8 h-full flex flex-col">
+              <h3 class="text-2xl font-bold text-white mb-4">
+                {service.title}
+              </h3>
+              <p class="text-white/80 leading-relaxed mb-6">
+                {service.description}
+              </p>
 
-            {/* Beneficios */}
-            <ul class="space-y-3 mb-8" role="list">
-              {service.benefits.map((benefit) => (
-                <li class="flex items-start gap-3 text-sm text-gray-700">
-                  <svg
-                    class="w-5 h-5 text-amber-800 shrink-0 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>{benefit}</span>
-                </li>
-              ))}
-            </ul>
+              {/* Beneficios */}
+              <ul class="space-y-3 mb-8 grow" role="list">
+                {service.benefits.map((benefit) => (
+                  <li class="flex items-start gap-3 text-sm text-white/90">
+                    <svg
+                      class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
 
-            {/* CTA */}
-            <a
-              href={service.href}
-              class="inline-flex items-center text-amber-800 font-semibold hover:text-amber-900 transition-colors group-hover:gap-3 gap-2"
-            >
-              Más información
-              <svg
-                class="w-5 h-5 transition-transform group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+              {/* CTA */}
+              <a
+                href={service.href}
+                class="inline-flex items-center text-amber-400 font-semibold hover:text-amber-300 transition-colors group-hover:gap-3 gap-2"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </a>
-
-            {/* Decoración */}
-            <div
-              class="absolute top-4 right-4 w-24 h-24 bg-amber-800 opacity-5 rounded-full blur-2xl"
-              aria-hidden="true"
-            />
+                Más información
+                <svg
+                  class="w-5 h-5 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </a>
+            </div>
           </article>
         ))
       }
@@ -194,3 +211,33 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  function initServiceCarousels() {
+    const carousels = document.querySelectorAll(".service-carousel");
+
+    carousels.forEach((carousel) => {
+      const slides = carousel.querySelectorAll(".carousel-slide");
+
+      if (slides.length <= 1) return;
+
+      let currentSlide = 0;
+
+      function showSlide(index: number) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("opacity-100", i === index);
+          slide.classList.toggle("opacity-0", i !== index);
+        });
+      }
+
+      // Autoplay cada 3 segundos
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 3000);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initServiceCarousels);
+  document.addEventListener("astro:page-load", initServiceCarousels);
+</script>

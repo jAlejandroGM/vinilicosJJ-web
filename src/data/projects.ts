@@ -11,7 +11,6 @@ export interface Project {
     end?: string;
   };
   area?: string;
-  category: "comercial" | "residencial" | "corporativo";
 }
 
 export const projects: Project[] = [
@@ -34,7 +33,6 @@ export const projects: Project[] = [
       end: "2025-09-30",
     },
     area: "1,200 m²",
-    category: "comercial",
   },
   {
     id: "residencia-la-molina",
@@ -54,7 +52,6 @@ export const projects: Project[] = [
       end: "2025-10-12",
     },
     area: "180 m²",
-    category: "residencial",
   },
   {
     id: "oficinas-san-isidro",
@@ -75,7 +72,6 @@ export const projects: Project[] = [
       end: "2025-11-25",
     },
     area: "450 m²",
-    category: "corporativo",
   },
   {
     id: "restaurante-barranco",
@@ -99,7 +95,6 @@ export const projects: Project[] = [
       end: "2025-12-08",
     },
     area: "280 m²",
-    category: "comercial",
   },
   {
     id: "departamento-surco",
@@ -119,7 +114,6 @@ export const projects: Project[] = [
       end: "2026-01-20",
     },
     area: "650 m²",
-    category: "residencial",
   },
   {
     id: "clinica-jesus-maria",
@@ -144,6 +138,5 @@ export const projects: Project[] = [
       end: "2025-10-10",
     },
     area: "800 m²",
-    category: "comercial",
   },
 ];
