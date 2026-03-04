@@ -1,0 +1,114 @@
+---
+interface Props {
+  images: string[];
+  productName: string;
+  imageAlt: string;
+}
+
+const { images, productName, imageAlt } = Astro.props;
+
+// Si solo hay una imagen, mostrar imagen estática
+const hasMultipleImages = images && images.length > 1;
+const displayImages = hasMultipleImages ? images : [images?.[0] || ''];
+---
+
+<div class="product-image-carousel relative max-w-3xl mx-auto mb-12" data-total-images={displayImages.length}>
+  <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-stone-200">
+    {hasMultipleImages ? (
+      <>
+        {/* Carousel Container */}
+        <div class="relative h-full">
+          {displayImages.map((image, index) => (
+            <div
+              class={`product-carousel-slide absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              data-slide-index={index}
+            >
+              <img
+                src={image}
+                alt={`${productName} - Imagen ${index + 1}`}
+                class="w-full h-full object-cover"
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Indicators */}
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {displayImages.map((_, index) => (
+            <div
+              class={`product-carousel-indicator w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-white w-6' : 'bg-white/50'}`}
+              data-indicator-index={index}
+            />
+          ))}
+        </div>
+      </>
+    ) : (
+      /* Imagen estática cuando solo hay una */
+      <img
+        src={displayImages[0]}
+        alt={imageAlt}
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+    )}
+  </div>
+</div>
+
+{hasMultipleImages && (
+  <script>
+    function initProductCarousel() {
+      const carousel = document.querySelector('.product-image-carousel');
+      if (!carousel) return;
+      
+      const totalImages = parseInt(carousel.getAttribute('data-total-images') || '0');
+      const slides = carousel.querySelectorAll('.product-carousel-slide');
+      const indicators = carousel.querySelectorAll('.product-carousel-indicator');
+      
+      if (slides.length <= 1) return;
+      
+      let currentSlide = 0;
+
+      // @ts-ignore
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('opacity-100', i === index);
+          slide.classList.toggle('opacity-0', i !== index);
+        });
+
+        indicators.forEach((indicator, i) => {
+          if (i === index) {
+            indicator.classList.add('bg-white', 'w-6');
+            indicator.classList.remove('bg-white/50');
+          } else {
+            indicator.classList.remove('bg-white', 'w-6');
+            indicator.classList.add('bg-white/50');
+          }
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalImages;
+        showSlide(currentSlide);
+      }
+
+      // Auto-advance every 4 seconds
+      const carouselInterval = setInterval(nextSlide, 4000);
+
+      // Cleanup on page navigation
+      document.addEventListener('astro:before-preparation', () => {
+        clearInterval(carouselInterval);
+      }, { once: true });
+    }
+
+    // Initialize on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProductCarousel);
+    } else {
+      initProductCarousel();
+    }
+
+    // Re-initialize on Astro page transitions
+    document.addEventListener('astro:page-load', initProductCarousel);
+  </script>
+)}
