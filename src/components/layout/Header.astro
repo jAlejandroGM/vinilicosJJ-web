@@ -78,12 +78,106 @@ const isProductsActive = currentPath.startsWith("/productos");
             })
           }
 
-          <!-- Dropdown de Productos -->
-          <DropdownMenu
-            label="Productos"
-            items={dropdownItems}
-            isActive={isProductsActive}
-          />
+          <!-- Link Productos con Dropdown -->
+          <div class="relative group">
+            <a
+              href="/productos"
+              class={`inline-flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                currentPath === "/productos" ||
+                currentPath.startsWith("/productos/")
+                  ? "bg-amber-800 text-white"
+                  : "text-gray-700 hover:bg-gray-100 hover:text-amber-800"
+              }`}
+              aria-current={currentPath === "/productos" ? "page" : undefined}
+            >
+              Productos
+              <svg
+                class="w-4 h-4 transition-transform group-hover:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+
+            <!-- Dropdown Menu -->
+            <div
+              class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-stone-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+              role="menu"
+              aria-orientation="vertical"
+            >
+              <div class="py-2">
+                {
+                  productNavItems.map((category) => (
+                    <div class="relative group/item">
+                      {/* Category Item */}
+                      <div class="flex items-start gap-3 px-4 py-3 hover:bg-stone-50 transition-colors cursor-default">
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center justify-between">
+                            <span class="font-semibold text-gray-900 text-sm">
+                              {category.label}
+                            </span>
+                            {category.subItems &&
+                              category.subItems.length > 0 && (
+                                <svg
+                                  class="w-4 h-4 text-gray-400 shrink-0"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                  />
+                                </svg>
+                              )}
+                          </div>
+                          {category.description && (
+                            <p class="text-xs text-gray-600 mt-0.5 line-clamp-1">
+                              {category.description}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Nested Submenu */}
+                      {category.subItems && category.subItems.length > 0 && (
+                        <div class="absolute right-full top-0 mr-1 w-72 bg-white rounded-xl shadow-xl border border-stone-100 opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-200 z-50">
+                          <div class="py-2">
+                            {category.subItems.map((subItem) => (
+                              <a
+                                href={subItem.href}
+                                class="block px-4 py-2.5 hover:bg-stone-50 transition-colors"
+                                role="menuitem"
+                              >
+                                <span class="font-medium text-gray-900 text-sm block">
+                                  {subItem.label}
+                                </span>
+                                {subItem.description && (
+                                  <span class="text-xs text-gray-600 block mt-0.5">
+                                    {subItem.description}
+                                  </span>
+                                )}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
 
           {
             navLinks.slice(2).map(({ href, label }) => {
@@ -175,20 +269,30 @@ const isProductsActive = currentPath.startsWith("/productos");
           })
         }
 
-        <!-- Productos (Mobile Accordion) -->
+        <!-- Productos (Mobile) -->
         <div class="border-t border-stone-100 pt-2">
-          <button
-            type="button"
-            id="mobile-productos-toggle"
-            class={`w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-colors ${
-              isProductsActive
+          <!-- Link directo a /productos -->}
+          <a
+            href="/productos"
+            class={`block px-4 py-3 rounded-lg font-medium transition-colors ${
+              currentPath === "/productos"
                 ? "bg-amber-800 text-white"
                 : "text-gray-700 hover:bg-gray-100 hover:text-amber-800"
             }`}
+            aria-current={currentPath === "/productos" ? "page" : undefined}
+          >
+            Productos
+          </a>
+
+          <!-- Toggle para Categorías -->
+          <button
+            type="button"
+            id="mobile-productos-toggle"
+            class="w-full flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-colors text-gray-700 hover:bg-gray-100 hover:text-amber-800 text-sm"
             aria-expanded="false"
             aria-controls="mobile-productos-menu"
           >
-            <span>Productos</span>
+            <span>Ver categorías</span>
             <svg
               class="w-5 h-5 transition-transform"
               id="mobile-productos-icon"

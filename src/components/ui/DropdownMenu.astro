@@ -11,9 +11,13 @@ interface Props {
   label: string;
   items: DropdownItem[];
   isActive?: boolean;
+  headerLink?: {
+    label: string;
+    href: string;
+  };
 }
 
-const { label, items, isActive = false } = Astro.props;
+const { label, items, isActive = false, headerLink } = Astro.props;
 ---
 
 <div class="relative group">
@@ -51,6 +55,18 @@ const { label, items, isActive = false } = Astro.props;
     aria-orientation="vertical"
   >
     <div class="py-2">
+      {/* Header Link (opcional) */}
+      {
+        headerLink && (
+          <a
+            href={headerLink.href}
+            class="block px-4 py-3 text-amber-800 font-semibold hover:bg-amber-50 transition-colors border-b border-stone-100 mb-2"
+            role="menuitem"
+          >
+            {headerLink.label}
+          </a>
+        )
+      }
       {
         items.map((item) => (
           <div class="relative group/item">
