@@ -21,6 +21,7 @@ export interface SubProduct {
   specifications: ProductSpecification[];
   imageUrl: string;
   imageAlt: string;
+  images?: string[]; // Múltiples imágenes para carousel
   price?: {
     value: number;
     unit: string;

@@ -4,6 +4,7 @@ import { productCategories, type SubProduct } from "../../../data/products";
 import Header from "../../../components/layout/Header.astro";
 import Footer from "../../../components/layout/Footer.astro";
 import CTA from "../../../components/sections/CTA.astro";
+import ProductImageCarousel from "../../../components/ui/ProductImageCarousel.astro";
 
 // Generar rutas estáticas solo para productos de pegamentos
 export async function getStaticPaths() {
@@ -70,18 +71,12 @@ const relatedProducts =
         </p>
       </div>
 
-      <!-- Imagen Destacada -->
-      <div class="max-w-3xl mx-auto mb-12">
-        <div
-          class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-stone-200"
-        >
-          <img
-            src={subProduct.imageUrl}
-            alt={subProduct.imageAlt}
-            class="w-full h-full object-cover"
-          />
-        </div>
-      </div>
+      <!-- Imagen Destacada / Carousel -->
+      <ProductImageCarousel
+        images={subProduct.images || [subProduct.imageUrl]}
+        productName={subProduct.name}
+        imageAlt={subProduct.imageAlt}
+      />
 
       <!-- Contenido Organizado -->
       <div class="max-w-5xl mx-auto">
