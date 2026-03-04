@@ -100,21 +100,53 @@ Gracias.`;
                     </a>
                   </div>
 
-                  {/* Beneficios */}
+                  {/* Beneficios - Flip Card */}
                   <div class={index % 2 === 1 ? "md:order-1" : ""}>
-                    <div class="bg-white rounded-2xl p-8 shadow-md border-2 border-amber-800/10 hover:border-amber-800/30 transition-colors">
-                      <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        ¿Qué Incluye?
-                      </h3>
-                      <div class="space-y-4">
-                        {service.benefits.map((benefit) => (
-                          <FeatureItem
-                            icon="M5 13l4 4L19 7"
-                            title={benefit.title}
-                            description={benefit.description}
-                            size="sm"
+                    <div
+                      class="flip-card cursor-pointer"
+                      data-service-id={service.id}
+                    >
+                      <div class="flip-card-inner relative w-full min-h-[350px]">
+                        {/* Front - Beneficios */}
+                        <div class="flip-card-front absolute inset-0 bg-white rounded-2xl p-8 shadow-md border-2 border-amber-800/10 hover:border-amber-800/30 transition-colors">
+                          <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            ¿Qué Incluye?
+                          </h3>
+                          <div class="space-y-4">
+                            {service.benefits.map((benefit) => (
+                              <FeatureItem
+                                icon="M5 13l4 4L19 7"
+                                title={benefit.title}
+                                description={benefit.description}
+                                size="sm"
+                              />
+                            ))}
+                          </div>
+                          <div class="absolute bottom-6 right-6">
+                            <svg
+                              class="w-6 h-6 text-amber-800/30"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5h-4m4 0v-4m0 4l-5-5"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+
+                        {/* Back - Imagen */}
+                        <div class="flip-card-back absolute inset-0 bg-white rounded-2xl shadow-md border-2 border-amber-800/10 overflow-hidden">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            class="w-full h-full object-cover object-center"
                           />
-                        ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -130,3 +162,40 @@ Gracias.`;
   <CTA />
   <Footer />
 </Layout>
+
+<style>
+  .flip-card {
+    perspective: 1000px;
+  }
+
+  .flip-card-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const flipCards = document.querySelectorAll(".flip-card");
+
+    flipCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+      });
+    });
+  });
+</script>

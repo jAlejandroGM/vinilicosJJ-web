@@ -9,6 +9,7 @@ export interface Service {
   title: string;
   description: string;
   benefits: ServiceBenefit[];
+  image: string;
 }
 
 export const services: Service[] = [
@@ -23,6 +24,7 @@ export const services: Service[] = [
       { title: "Piso conductivo antiestático" },
       { title: "Piso vinílico SPC" },
     ],
+    image: "/placeholder-instalacion-pisos.jpg",
   },
   {
     id: "aplicacion-alisado",
@@ -35,6 +37,7 @@ export const services: Service[] = [
       { title: "Preparación del área" },
       { title: "Mejora de adherencia" },
     ],
+    image: "/placeholder-alisado.jpg",
   },
   {
     id: "instalacion-zocalo",
@@ -47,6 +50,7 @@ export const services: Service[] = [
       { title: "Terminaciones precisas" },
       { title: "Integración con el piso" },
     ],
+    image: "/placeholder-zocalo.jpg",
   },
   {
     id: "venta-materiales",
@@ -59,6 +63,7 @@ export const services: Service[] = [
       { title: "Pegamentos y adhesivos" },
       { title: "Materiales complementarios para instalación" },
     ],
+    image: "/placeholder-materiales.jpg",
   },
   {
     id: "mantenimiento",
@@ -71,6 +76,7 @@ export const services: Service[] = [
       { title: "Mantenimiento preventivo" },
       { title: "Ajustes y correcciones necesarias" },
     ],
+    image: "/placeholder-mantenimiento.jpg",
   },
   {
     id: "asesoria",
@@ -83,5 +89,6 @@ export const services: Service[] = [
       { title: "Recomendaciones técnicas" },
       { title: "Acompañamiento durante el proceso" },
     ],
+    image: "/placeholder-asesoria.jpg",
   },
 ];
